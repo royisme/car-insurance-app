@@ -75,7 +75,7 @@ function HomeContent() {
                     </p>
                     <Link
                       href="/quote"
-                      className="bg-gray-200 text-gray-800 px-4 py-2 border-round font-medium hover:bg-gray-300 transition-colors inline-flex align-items-center justify-content-center no-underline"
+                      className="bg-primary  px-4 py-2 border-round font-medium hover:bg-gray-300 transition-colors inline-flex align-items-center justify-content-center no-underline"
                       style={{ height: '3rem', minWidth: '10rem' }}
                     >
                       {t('landing.start_now')}
