@@ -11,7 +11,7 @@ import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { Toast } from 'primereact/toast';
 import { Panel } from 'primereact/panel';
-import Header from '@/app/../components/Header';
+import Header from '@/app/components/Header';
 
 export default function ResultPage() {
   const t = useTranslations();

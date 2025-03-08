@@ -9,7 +9,7 @@ import { Checkbox } from 'primereact/checkbox';
 import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
 
-import { generateVehicleInfo } from '@/app/../../utils/demoDataGenerator';
+import { generateVehicleInfo } from '@/app/utils/demoDataGenerator';
 
 // Props interface
 interface VehicleInfoFormProps {
