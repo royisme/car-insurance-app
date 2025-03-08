@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import { Link, useRouter, usePathname } from '../i18n/client';
+import { Link, useRouter, usePathname } from '@/app/i18n/client';
 import Image from 'next/image';
 import { Dropdown } from 'primereact/dropdown';
 import { InputSwitch } from 'primereact/inputswitch';

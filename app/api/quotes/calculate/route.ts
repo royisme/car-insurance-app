@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import calculatePremium from '../../../lib/calculatePremium';
+import calculatePremium from '@/app/../../lib/calculatePremium';
 
 // POST /api/quotes/calculate - Calculate premium without saving
 export async function POST(request: Request) {

@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { NextIntlClientProvider } from 'next-intl';
 import { PrimeReactProvider } from 'primereact/api';
-import { locales } from '../i18n/client';
+import { locales } from '@/app/i18n/client';
 
 // Types and interfaces
 interface LocaleLayoutProps {

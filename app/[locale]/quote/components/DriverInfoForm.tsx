@@ -9,7 +9,7 @@ import { Calendar } from 'primereact/calendar';
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
-import { generateDriverInfo } from '../../../utils/demoDataGenerator';
+import { generateDriverInfo } from '@/app/../../utils/demoDataGenerator';
 
 // Props interface
 interface DriverInfoFormProps {

@@ -10,7 +10,7 @@ import { Button } from 'primereact/button';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { Divider } from 'primereact/divider';
 import { Dialog } from 'primereact/dialog';
-import { generateCoverageInfo } from '../../../utils/demoDataGenerator';
+import { generateCoverageInfo } from '@/app/../../utils/demoDataGenerator';
 
 // Utility function for creating delays
 const sleep = (ms: number): Promise<void> => new Promise(resolve => setTimeout(resolve, ms));

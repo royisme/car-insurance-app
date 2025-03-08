@@ -1,8 +1,8 @@
 import { Suspense } from 'react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import Header from '../components/Header';
-import QuoteSteps from '../components/QuoteSteps';
+import Header from '@/app/components/Header';
+import QuoteSteps from '@/app/components/QuoteSteps';
 
 // Homepage component
 export default function Home() {
