@@ -1,0 +1,214 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// 多语言支持
+model Translation {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  namespace String   // common, landing, driver_info, etc.
+  en        String
+  zh        String
+}
+
+// 省份数据
+model Province {
+  id                 String   @id
+  name_en            String
+  name_zh            String
+  capital            String
+  minLiabilityAmount Int
+  insuranceSystem    String
+  mandatoryCoverages String[]
+  optionalCoverages  String[]
+  quotes             Quote[]
+}
+
+// 车辆品牌
+model Make {
+  id     Int     @id @default(autoincrement())
+  name   String  @unique
+  models Model[]
+}
+
+// 车辆型号
+model Model {
+  id              Int      @id @default(autoincrement())
+  name            String
+  types           String[]
+  years           Int[]
+  insurance_group String
+  safety_rating   Float
+  make            Make     @relation(fields: [makeId], references: [id])
+  makeId          Int
+  vehicles        Vehicle[]
+}
+
+// 保险类型
+model Coverage {
+  id              String   @id
+  name_en         String
+  name_zh         String
+  description_en  String
+  description_zh  String
+  isMandatory     Boolean
+  defaultAmount   String?
+  defaultDeductible Int?
+  options         Json?    // 存储可选保险额度或免赔额选项
+  quoteInsurances QuoteInsurance[]
+}
+
+// 附加险
+model Endorsement {
+  id             String   @id
+  name_en        String
+  name_zh        String
+  description_en String
+  description_zh String
+  premium_factor Float
+  quoteEndorsements QuoteEndorsement[]
+}
+
+// 驾驶员分类
+model DriverCategory {
+  id              String   @id
+  category_type   String   // age_group, experience, history, etc.
+  min_value       Int?
+  max_value       Int?
+  premium_factor  Float
+  description_en  String
+  description_zh  String
+}
+
+// 折扣选项
+model Discount {
+  id              String   @id
+  discount_factor Float
+  description_en  String
+  description_zh  String
+  quoteDiscounts  QuoteDiscount[]
+}
+
+// 车辆使用类型
+model VehicleUsage {
+  id              String   @id
+  premium_factor  Float
+  description_en  String
+  description_zh  String
+  annual_km_range String
+  vehicles        Vehicle[]
+}
+
+// 报价流程
+model Quote {
+  id                String   @id @default(cuid())
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  // 客户信息
+  firstName         String
+  lastName          String
+  email             String
+  phone             String?
+  dateOfBirth       DateTime
+  gender            String
+  addressLine1      String
+  addressLine2      String?
+  city              String
+  province          Province @relation(fields: [provinceId], references: [id])
+  provinceId        String
+  postalCode        String
+  
+  // 驾驶历史
+  licenseYears      Int
+  accidents3Years   Int      @default(0)
+  violations3Years  Int      @default(0)
+  claims3Years      Int      @default(0)
+  
+  // 报价结果
+  basePremium       Float?
+  discountAmount    Float?
+  fees              Float?
+  taxes             Float?
+  annualPremium     Float?
+  monthlyPremium    Float?
+  status            String   @default("draft")  // draft, completed, emailed
+  referenceNumber   String   @unique @default(cuid())
+  
+  // 关联
+  vehicles          Vehicle[]
+  selectedCoverages QuoteInsurance[]
+  selectedEndorsements QuoteEndorsement[]
+  appliedDiscounts  QuoteDiscount[]
+}
+
+// 车辆信息
+model Vehicle {
+  id              String   @id @default(cuid())
+  year            Int
+  model           Model    @relation(fields: [modelId], references: [id])
+  modelId         Int
+  type            String
+  primaryUse      VehicleUsage @relation(fields: [vehicleUsageId], references: [id])
+  vehicleUsageId  String
+  annualMileage   Int
+  parking         String
+  antiTheft       Boolean  @default(false)
+  winterTires     Boolean  @default(false)
+  quote           Quote    @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+  quoteId         String
+}
+
+// 报价中选择的保险
+model QuoteInsurance {
+  id          String   @id @default(cuid())
+  quote       Quote    @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+  quoteId     String
+  coverage    Coverage @relation(fields: [coverageId], references: [id])
+  coverageId  String
+  amount      String?  // 保险金额或保障等级
+  deductible  Int?     // 免赔额（如适用）
+  premium     Float    // 此保障的保费
+  
+  @@unique([quoteId, coverageId])
+}
+
+// 报价中选择的附加险
+model QuoteEndorsement {
+  id            String      @id @default(cuid())
+  quote         Quote       @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+  quoteId       String
+  endorsement   Endorsement @relation(fields: [endorsementId], references: [id])
+  endorsementId String
+  premium       Float       // 此附加险的保费
+  
+  @@unique([quoteId, endorsementId])
+}
+
+// 应用的折扣
+model QuoteDiscount {
+  id          String   @id @default(cuid())
+  quote       Quote    @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+  quoteId     String
+  discount    Discount @relation(fields: [discountId], references: [id])
+  discountId  String
+  amount      Float    // 折扣金额
+  
+  @@unique([quoteId, discountId])
+}
+
+// 主题设置
+model Theme {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  colors      Json     // 存储主题颜色变量
+  isDefault   Boolean  @default(false)
+}

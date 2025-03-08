@@ -1,0 +1,236 @@
+{
+  "coverages": [
+    {
+      "id": "third_party_liability",
+      "name_en": "Third-Party Liability",
+      "name_zh": "第三方责任险",
+      "description_en": "Covers damage or injury to others for which you are legally responsible.",
+      "description_zh": "为您须负法律责任的对他人造成的伤害或损失提供保障。",
+      "isMandatory": true,
+      "defaultAmount": 1000000,
+      "options": [
+        {
+          "amount": 200000,
+          "premium_factor": 0.8
+        },
+        {
+          "amount": 500000,
+          "premium_factor": 0.9
+        },
+        {
+          "amount": 1000000,
+          "premium_factor": 1.0
+        },
+        {
+          "amount": 2000000,
+          "premium_factor": 1.15
+        }
+      ]
+    },
+    {
+      "id": "accident_benefits",
+      "name_en": "Accident Benefits",
+      "name_zh": "意外伤害保险",
+      "description_en": "Provides coverage for medical costs, income replacement, and other benefits if you're injured in an accident.",
+      "description_zh": "为事故中受伤的您提供医疗费用、收入损失补偿及其他福利保障。",
+      "isMandatory": true,
+      "defaultAmount": 50000,
+      "options": [
+        {
+          "amount": 50000,
+          "level": "standard",
+          "premium_factor": 1.0
+        },
+        {
+          "amount": 100000,
+          "level": "enhanced",
+          "premium_factor": 1.25
+        },
+        {
+          "amount": 150000,
+          "level": "premium",
+          "premium_factor": 1.5
+        }
+      ]
+    },
+    {
+      "id": "collision",
+      "name_en": "Collision Coverage",
+      "name_zh": "碰撞险",
+      "description_en": "Covers damage to your vehicle caused by collision with another vehicle or object.",
+      "description_zh": "为您的车辆与其他车辆或物体碰撞造成的损失提供保障。",
+      "isMandatory": false,
+      "defaultDeductible": 500,
+      "options": [
+        {
+          "deductible": 250,
+          "premium_factor": 1.2
+        },
+        {
+          "deductible": 500,
+          "premium_factor": 1.0
+        },
+        {
+          "deductible": 1000,
+          "premium_factor": 0.8
+        },
+        {
+          "deductible": 2000,
+          "premium_factor": 0.65
+        }
+      ]
+    },
+    {
+      "id": "comprehensive",
+      "name_en": "Comprehensive Coverage",
+      "name_zh": "综合保险",
+      "description_en": "Covers damage to your vehicle caused by theft, vandalism, fire, natural disasters, etc.",
+      "description_zh": "为您的车辆因盗窃、人为破坏、火灾、自然灾害等原因造成的损失提供保障。",
+      "isMandatory": false,
+      "defaultDeductible": 500,
+      "options": [
+        {
+          "deductible": 250,
+          "premium_factor": 1.2
+        },
+        {
+          "deductible": 500,
+          "premium_factor": 1.0
+        },
+        {
+          "deductible": 1000,
+          "premium_factor": 0.8
+        },
+        {
+          "deductible": 2000,
+          "premium_factor": 0.65
+        }
+      ]
+    },
+    {
+      "id": "specified_perils",
+      "name_en": "Specified Perils",
+      "name_zh": "特定风险保险",
+      "description_en": "Covers damage to your vehicle from specific causes like fire, theft, lightning, windstorm, etc.",
+      "description_zh": "为您的车辆因火灾、盗窃、雷击、风暴等特定风险造成的损失提供保障。",
+      "isMandatory": false,
+      "defaultDeductible": 500,
+      "options": [
+        {
+          "deductible": 250,
+          "premium_factor": 1.15
+        },
+        {
+          "deductible": 500,
+          "premium_factor": 1.0
+        },
+        {
+          "deductible": 1000,
+          "premium_factor": 0.85
+        }
+      ]
+    },
+    {
+      "id": "uninsured_automobile",
+      "name_en": "Uninsured Automobile",
+      "name_zh": "无保险驾驶人保障",
+      "description_en": "Protects you if you're injured or your car is damaged by an uninsured or hit-and-run driver.",
+      "description_zh": "为您因无保险驾驶人或肇事逃逸驾驶人造成的伤害或车辆损失提供保障。",
+      "isMandatory": true,
+      "defaultAmount": 200000,
+      "defaultDeductible": 500,
+      "options": [
+        {
+          "amount": 200000,
+          "deductible": 500,
+          "level": "standard",
+          "premium_factor": 1.0
+        },
+        {
+          "amount": 500000,
+          "deductible": 250,
+          "level": "enhanced",
+          "premium_factor": 1.2
+        }
+      ]
+    },
+    {
+      "id": "direct_compensation_property_damage",
+      "name_en": "Direct Compensation Property Damage",
+      "name_zh": "直接赔偿财产损失",
+      "description_en": "Covers damage to your vehicle when another driver is at fault.",
+      "description_zh": "为其他驾驶人过错导致的您车辆损失提供保障。",
+      "isMandatory": true,
+      "defaultAmount": "standard",
+      "options": [
+        {
+          "level": "standard",
+          "premium_factor": 1.0
+        }
+      ]
+    },
+    {
+      "id": "all_perils",
+      "name_en": "All Perils",
+      "name_zh": "全险",
+      "description_en": "Combines collision and comprehensive coverage, plus protection against theft by someone living in your household.",
+      "description_zh": "结合碰撞险和综合险，另外增加对家庭成员盗窃行为的保障。",
+      "isMandatory": false,
+      "defaultDeductible": 500,
+      "options": [
+        {
+          "deductible": 250,
+          "premium_factor": 1.25
+        },
+        {
+          "deductible": 500,
+          "premium_factor": 1.0
+        },
+        {
+          "deductible": 1000,
+          "premium_factor": 0.75
+        }
+      ]
+    }
+  ],
+  
+  "endorsements": [
+    {
+      "id": "loss_of_use",
+      "name_en": "Loss of Use Coverage",
+      "name_zh": "使用损失保障",
+      "description_en": "Covers costs of renting a vehicle or using alternative transportation while your car is being repaired.",
+      "description_zh": "为您的车辆维修期间租用替代车辆或使用其他交通方式的费用提供保障。",
+      "premium_factor": 0.05,
+      "daily_limit": 50,
+      "max_days": 14
+    },
+    {
+      "id": "waiver_of_depreciation",
+      "name_en": "Waiver of Depreciation",
+      "name_zh": "贬值豁免",
+      "description_en": "For new vehicles, ensures you receive the full purchase price without depreciation if your car is a total loss.",
+      "description_zh": "针对新车，确保车辆全损时您能获得全额购车款而不计贬值。",
+      "premium_factor": 0.10,
+      "eligibility": "new_vehicles_only",
+      "max_vehicle_age_years": 2
+    },
+    {
+      "id": "accident_forgiveness",
+      "name_en": "Accident Forgiveness",
+      "name_zh": "事故宽恕",
+      "description_en": "Prevents your premiums from increasing after your first at-fault accident.",
+      "description_zh": "防止您因首次过失事故导致保费上涨。",
+      "premium_factor": 0.08,
+      "eligibility": "claims_free_5_years"
+    },
+    {
+      "id": "roadside_assistance",
+      "name_en": "Roadside Assistance",
+      "name_zh": "道路救援",
+      "description_en": "Provides help if your vehicle breaks down, runs out of gas, or needs a tow.",
+      "description_zh": "为车辆故障、燃油耗尽或需要拖车等情况提供帮助。",
+      "premium_factor": 0.04
+    }
+  ]
+}

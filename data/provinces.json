@@ -1,0 +1,241 @@
+{
+  "provinces": [
+    {
+      "id": "ON",
+      "name_en": "Ontario",
+      "name_zh": "安大略省",
+      "capital": "Toronto",
+      "minLiabilityAmount": 200000,
+      "insuranceSystem": "private",
+      "mandatoryCoverages": [
+        "third_party_liability",
+        "accident_benefits",
+        "direct_compensation_property_damage",
+        "uninsured_automobile"
+      ],
+      "optionalCoverages": [
+        "collision",
+        "comprehensive",
+        "specified_perils",
+        "all_perils"
+      ]
+    },
+    {
+      "id": "BC",
+      "name_en": "British Columbia",
+      "name_zh": "不列颠哥伦比亚省",
+      "capital": "Victoria",
+      "minLiabilityAmount": 200000,
+      "insuranceSystem": "public_private",
+      "mandatoryCoverages": [
+        "third_party_liability",
+        "accident_benefits",
+        "uninsured_motorist_protection"
+      ],
+      "optionalCoverages": [
+        "collision",
+        "comprehensive",
+        "specified_perils"
+      ]
+    },
+    {
+      "id": "AB",
+      "name_en": "Alberta",
+      "name_zh": "阿尔伯塔省",
+      "capital": "Edmonton",
+      "minLiabilityAmount": 200000,
+      "insuranceSystem": "private",
+      "mandatoryCoverages": [
+        "third_party_liability",
+        "accident_benefits",
+        "direct_compensation_property_damage"
+      ],
+      "optionalCoverages": [
+        "collision",
+        "comprehensive",
+        "specified_perils",
+        "all_perils"
+      ]
+    },
+    {
+      "id": "QC",
+      "name_en": "Quebec",
+      "name_zh": "魁北克省",
+      "capital": "Quebec City",
+      "minLiabilityAmount": 50000,
+      "insuranceSystem": "public_private",
+      "mandatoryCoverages": [
+        "third_party_liability"
+      ],
+      "optionalCoverages": [
+        "collision",
+        "comprehensive",
+        "specified_perils",
+        "all_perils"
+      ],
+      "note": "In Quebec, injury coverage is provided by the public system (SAAQ)"
+    },
+    {
+      "id": "MB",
+      "name_en": "Manitoba",
+      "name_zh": "曼尼托巴省",
+      "capital": "Winnipeg",
+      "minLiabilityAmount": 200000,
+      "insuranceSystem": "public",
+      "mandatoryCoverages": [
+        "third_party_liability",
+        "accident_benefits",
+        "uninsured_automobile"
+      ],
+      "optionalCoverages": [
+        "collision",
+        "comprehensive",
+        "specified_perils"
+      ]
+    },
+    {
+      "id": "SK",
+      "name_en": "Saskatchewan",
+      "name_zh": "萨斯喀彻温省",
+      "capital": "Regina",
+      "minLiabilityAmount": 200000,
+      "insuranceSystem": "public",
+      "mandatoryCoverages": [
+        "third_party_liability",
+        "accident_benefits",
+        "damage_to_your_vehicle"
+      ],
+      "optionalCoverages": [
+        "extended_liability",
+        "loss_of_use",
+        "rental_vehicle"
+      ]
+    },
+    {
+      "id": "NS",
+      "name_en": "Nova Scotia",
+      "name_zh": "新斯科舍省",
+      "capital": "Halifax",
+      "minLiabilityAmount": 500000,
+      "insuranceSystem": "private",
+      "mandatoryCoverages": [
+        "third_party_liability",
+        "accident_benefits",
+        "uninsured_automobile",
+        "direct_compensation_property_damage"
+      ],
+      "optionalCoverages": [
+        "collision",
+        "comprehensive",
+        "specified_perils",
+        "all_perils"
+      ]
+    },
+    {
+      "id": "NB",
+      "name_en": "New Brunswick",
+      "name_zh": "新不伦瑞克省",
+      "capital": "Fredericton",
+      "minLiabilityAmount": 200000,
+      "insuranceSystem": "private",
+      "mandatoryCoverages": [
+        "third_party_liability",
+        "accident_benefits",
+        "uninsured_automobile",
+        "direct_compensation_property_damage"
+      ],
+      "optionalCoverages": [
+        "collision",
+        "comprehensive",
+        "specified_perils"
+      ]
+    },
+    {
+      "id": "NL",
+      "name_en": "Newfoundland and Labrador",
+      "name_zh": "纽芬兰和拉布拉多省",
+      "capital": "St. John's",
+      "minLiabilityAmount": 200000,
+      "insuranceSystem": "private",
+      "mandatoryCoverages": [
+        "third_party_liability",
+        "uninsured_automobile"
+      ],
+      "optionalCoverages": [
+        "collision",
+        "comprehensive",
+        "accident_benefits",
+        "specified_perils"
+      ]
+    },
+    {
+      "id": "PE",
+      "name_en": "Prince Edward Island",
+      "name_zh": "爱德华王子岛省",
+      "capital": "Charlottetown",
+      "minLiabilityAmount": 200000,
+      "insuranceSystem": "private",
+      "mandatoryCoverages": [
+        "third_party_liability",
+        "accident_benefits",
+        "uninsured_automobile"
+      ],
+      "optionalCoverages": [
+        "collision",
+        "comprehensive",
+        "specified_perils"
+      ]
+    },
+    {
+      "id": "YT",
+      "name_en": "Yukon",
+      "name_zh": "育空地区",
+      "capital": "Whitehorse",
+      "minLiabilityAmount": 200000,
+      "insuranceSystem": "private",
+      "mandatoryCoverages": [
+        "third_party_liability"
+      ],
+      "optionalCoverages": [
+        "collision",
+        "comprehensive",
+        "specified_perils",
+        "accident_benefits"
+      ]
+    },
+    {
+      "id": "NT",
+      "name_en": "Northwest Territories",
+      "name_zh": "西北地区",
+      "capital": "Yellowknife",
+      "minLiabilityAmount": 200000,
+      "insuranceSystem": "private",
+      "mandatoryCoverages": [
+        "third_party_liability",
+        "accident_benefits"
+      ],
+      "optionalCoverages": [
+        "collision",
+        "comprehensive",
+        "specified_perils"
+      ]
+    },
+    {
+      "id": "NU",
+      "name_en": "Nunavut",
+      "name_zh": "努纳武特地区",
+      "capital": "Iqaluit",
+      "minLiabilityAmount": 200000,
+      "insuranceSystem": "private",
+      "mandatoryCoverages": [
+        "third_party_liability",
+        "accident_benefits"
+      ],
+      "optionalCoverages": [
+        "collision",
+        "comprehensive",
+        "specified_perils"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+{
+  "driverAgeGroups": [
+    {
+      "id": "young",
+      "min_age": 16,
+      "max_age": 24,
+      "premium_factor": 1.5,
+      "description_en": "Young Drivers",
+      "description_zh": "年轻驾驶员"
+    },
+    {
+      "id": "adult",
+      "min_age": 25,
+      "max_age": 64,
+      "premium_factor": 1.0,
+      "description_en": "Adult Drivers",
+      "description_zh": "成年驾驶员"
+    },
+    {
+      "id": "senior",
+      "min_age": 65,
+      "max_age": 120,
+      "premium_factor": 1.15,
+      "description_en": "Senior Drivers",
+      "description_zh": "老年驾驶员"
+    }
+  ],
+  
+  "drivingExperience": [
+    {
+      "id": "novice",
+      "min_years": 0,
+      "max_years": 2,
+      "premium_factor": 1.3,
+      "description_en": "Novice Drivers",
+      "description_zh": "新手驾驶员"
+    },
+    {
+      "id": "intermediate",
+      "min_years": 3,
+      "max_years": 9,
+      "premium_factor": 1.0,
+      "description_en": "Intermediate Drivers",
+      "description_zh": "中级驾驶员"
+    },
+    {
+      "id": "experienced",
+      "min_years": 10,
+      "max_years": 1000,
+      "premium_factor": 0.9,
+      "description_en": "Experienced Drivers",
+      "description_zh": "经验丰富的驾驶员"
+    }
+  ],
+  
+  "drivingHistory": [
+    {
+      "id": "clean",
+      "premium_factor": 1.0,
+      "description_en": "Clean Driving Record",
+      "description_zh": "良好驾驶记录"
+    },
+    {
+      "id": "minor_infraction",
+      "premium_factor": 1.2,
+      "description_en": "Minor Traffic Violations",
+      "description_zh": "轻微交通违规"
+    },
+    {
+      "id": "major_infraction",
+      "premium_factor": 1.5,
+      "description_en": "Major Traffic Violations",
+      "description_zh": "严重交通违规"
+    },
+    {
+      "id": "at_fault_accident",
+      "premium_factor": 1.4,
+      "description_en": "At-Fault Accidents",
+      "description_zh": "过失事故"
+    },
+    {
+      "id": "multiple_infractions",
+      "premium_factor": 1.8,
+      "description_en": "Multiple Violations/Accidents",
+      "description_zh": "多项违规/事故"
+    }
+  ],
+  
+  "discounts": [
+    {
+      "id": "multi_vehicle",
+      "discount_factor": 0.1,
+      "description_en": "Multi-Vehicle Discount",
+      "description_zh": "多车折扣"
+    },
+    {
+      "id": "multi_line",
+      "discount_factor": 0.15,
+      "description_en": "Multi-Line Discount (Auto + Home)",
+      "description_zh": "多险种折扣（车险+家险）"
+    },
+    {
+      "id": "claims_free",
+      "discount_factor": 0.2,
+      "description_en": "Claims-Free Discount (5+ years)",
+      "description_zh": "无索赔折扣（5年以上）"
+    },
+    {
+      "id": "winter_tires",
+      "discount_factor": 0.05,
+      "description_en": "Winter Tire Discount",
+      "description_zh": "冬季轮胎折扣"
+    },
+    {
+      "id": "driving_course",
+      "discount_factor": 0.1,
+      "description_en": "Driving Course Discount",
+      "description_zh": "驾驶课程折扣"
+    },
+    {
+      "id": "telematics",
+      "discount_factor": 0.15,
+      "description_en": "Telematics/Usage-Based Insurance Discount",
+      "description_zh": "远程信息处理/基于使用习惯的保险折扣"
+    },
+    {
+      "id": "retiree",
+      "discount_factor": 0.1,
+      "description_en": "Retiree Discount",
+      "description_zh": "退休人员折扣"
+    },
+    {
+      "id": "loyalty",
+      "discount_factor": 0.05,
+      "description_en": "Loyalty Discount",
+      "description_zh": "忠诚客户折扣"
+    }
+  ],
+  
+  "vehicleUsage": [
+    {
+      "id": "pleasure",
+      "premium_factor": 1.0,
+      "description_en": "Pleasure Use Only",
+      "description_zh": "仅供休闲使用",
+      "annual_km_range": "Less than 5,000 km/year"
+    },
+    {
+      "id": "commute_short",
+      "premium_factor": 1.1,
+      "description_en": "Commuting (Short Distance)",
+      "description_zh": "通勤（短距离）",
+      "annual_km_range": "5,000 - 15,000 km/year"
+    },
+    {
+      "id": "commute_long",
+      "premium_factor": 1.25,
+      "description_en": "Commuting (Long Distance)",
+      "description_zh": "通勤（长距离）",
+      "annual_km_range": "15,000 - 25,000 km/year"
+    },
+    {
+      "id": "business",
+      "premium_factor": 1.4,
+      "description_en": "Business Use",
+      "description_zh": "商业用途",
+      "annual_km_range": "Varies"
+    }
+  ]
+}

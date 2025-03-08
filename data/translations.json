@@ -1,0 +1,494 @@
+{
+  "common": {
+    "appName": {
+      "en": "Canadian Auto Insurance Quote",
+      "zh": "加拿大汽车保险报价"
+    },
+    "welcome": {
+      "en": "Welcome to our Auto Insurance Quote Tool",
+      "zh": "欢迎使用我们的汽车保险报价工具"
+    },
+    "getStarted": {
+      "en": "Get Started",
+      "zh": "立即开始"
+    },
+    "next": {
+      "en": "Next",
+      "zh": "下一步"
+    },
+    "previous": {
+      "en": "Previous",
+      "zh": "上一步"
+    },
+    "submit": {
+      "en": "Submit",
+      "zh": "提交"
+    },
+    "cancel": {
+      "en": "Cancel",
+      "zh": "取消"
+    },
+    "save": {
+      "en": "Save",
+      "zh": "保存"
+    },
+    "continue": {
+      "en": "Continue",
+      "zh": "继续"
+    },
+    "loading": {
+      "en": "Loading...",
+      "zh": "加载中..."
+    },
+    "required": {
+      "en": "Required",
+      "zh": "必填"
+    },
+    "optional": {
+      "en": "Optional",
+      "zh": "可选"
+    },
+    "error": {
+      "en": "Error",
+      "zh": "错误"
+    },
+    "success": {
+      "en": "Success",
+      "zh": "成功"
+    },
+    "warning": {
+      "en": "Warning",
+      "zh": "警告"
+    },
+    "info": {
+      "en": "Information",
+      "zh": "信息"
+    },
+    "emailSent": {
+      "en": "Email has been sent successfully",
+      "zh": "邮件已成功发送"
+    },
+    "emailFailed": {
+      "en": "Failed to send email",
+      "zh": "邮件发送失败"
+    },
+    "language": {
+      "en": "Language",
+      "zh": "语言"
+    },
+    "theme": {
+      "en": "Theme",
+      "zh": "主题"
+    },
+    "professionalTheme": {
+      "en": "Professional",
+      "zh": "专业"
+    },
+    "vibrantTheme": {
+      "en": "Vibrant",
+      "zh": "活泼"
+    }
+  },
+  
+  "landing": {
+    "title": {
+      "en": "Get Your Car Insurance Quote in 3 Easy Steps",
+      "zh": "三个简单步骤获取您的汽车保险报价"
+    },
+    "subtitle": {
+      "en": "Fast, Easy, and Personalized",
+      "zh": "快速、简单且个性化"
+    },
+    "demo_mode": {
+      "en": "Demo Mode",
+      "zh": "演示模式"
+    },
+    "get_quote": {
+      "en": "Get a Quote",
+      "zh": "获取报价"
+    },
+    "information_protected": {
+      "en": "Your information is protected",
+      "zh": "您的信息受到保护"
+    },
+    "step1_title": {
+      "en": "Driver Information",
+      "zh": "驾驶员信息"
+    },
+    "step1_desc": {
+      "en": "Tell us about yourself and your driving history",
+      "zh": "告诉我们您的个人信息和驾驶历史"
+    },
+    "step2_title": {
+      "en": "Vehicle Information",
+      "zh": "车辆信息"
+    },
+    "step2_desc": {
+      "en": "Provide details about your vehicle",
+      "zh": "提供您的车辆详情"
+    },
+    "step3_title": {
+      "en": "Coverage Selection",
+      "zh": "保险选择"
+    },
+    "step3_desc": {
+      "en": "Choose the coverage that fits your needs",
+      "zh": "选择适合您需求的保险"
+    },
+    "quote_process": {
+      "en": "Quote Process",
+      "zh": "报价流程"
+    },
+    "ready_to_start": {
+      "en": "Ready to start your quote? It only takes a few minutes.",
+      "zh": "准备开始您的报价了吗？只需几分钟。"
+    },
+    "start_now": {
+      "en": "Start Now",
+      "zh": "立即开始"
+    },
+    "feature1_title": {
+      "en": "Comprehensive Coverage",
+      "zh": "全面保障"
+    },
+    "feature1_desc": {
+      "en": "Get protection for a wide range of situations and incidents.",
+      "zh": "为各种情况和事件提供保护。"
+    },
+    "feature2_title": {
+      "en": "Affordable Rates",
+      "zh": "实惠价格"
+    },
+    "feature2_desc": {
+      "en": "Find competitive rates tailored to your specific needs.",
+      "zh": "找到适合您特定需求的有竞争力的价格。"
+    },
+    "feature3_title": {
+      "en": "Quick Claims Process",
+      "zh": "快速理赔流程"
+    },
+    "feature3_desc": {
+      "en": "Our streamlined claims process gets you back on the road faster.",
+      "zh": "我们精简的理赔流程让您更快回到路上。"
+    }
+  },
+  
+  "driver_info": {
+    "title": {
+      "en": "Driver Information",
+      "zh": "驾驶员信息"
+    },
+    "subtitle": {
+      "en": "Tell us about yourself to get an accurate quote",
+      "zh": "告诉我们您的信息以获得准确的报价"
+    },
+    "personal_details": {
+      "en": "Personal Details",
+      "zh": "个人详细信息"
+    },
+    "first_name": {
+      "en": "First Name",
+      "zh": "名"
+    },
+    "last_name": {
+      "en": "Last Name",
+      "zh": "姓"
+    },
+    "email": {
+      "en": "Email Address",
+      "zh": "电子邮箱"
+    },
+    "phone": {
+      "en": "Phone Number",
+      "zh": "电话号码"
+    },
+    "dob": {
+      "en": "Date of Birth",
+      "zh": "出生日期"
+    },
+    "gender": {
+      "en": "Gender",
+      "zh": "性别"
+    },
+    "male": {
+      "en": "Male",
+      "zh": "男"
+    },
+    "female": {
+      "en": "Female",
+      "zh": "女"
+    },
+    "other": {
+      "en": "Other",
+      "zh": "其他"
+    },
+    "address": {
+      "en": "Address",
+      "zh": "地址"
+    },
+    "address_line1": {
+      "en": "Address Line 1",
+      "zh": "地址第一行"
+    },
+    "address_line2": {
+      "en": "Address Line 2",
+      "zh": "地址第二行"
+    },
+    "city": {
+      "en": "City",
+      "zh": "城市"
+    },
+    "province": {
+      "en": "Province",
+      "zh": "省份"
+    },
+    "postal_code": {
+      "en": "Postal Code",
+      "zh": "邮政编码"
+    },
+    "driving_history": {
+      "en": "Driving History",
+      "zh": "驾驶历史"
+    },
+    "license_years": {
+      "en": "Years Licensed",
+      "zh": "持有驾照年数"
+    },
+    "accidents_3years": {
+      "en": "At-fault Accidents in Last 3 Years",
+      "zh": "过去3年内的过失事故"
+    },
+    "violations_3years": {
+      "en": "Traffic Violations in Last 3 Years",
+      "zh": "过去3年内的交通违规"
+    },
+    "claims_3years": {
+      "en": "Insurance Claims in Last 3 Years",
+      "zh": "过去3年内的保险索赔"
+    }
+  },
+  
+  "vehicle_info": {
+    "title": {
+      "en": "Vehicle Information",
+      "zh": "车辆信息"
+    },
+    "subtitle": {
+      "en": "Tell us about your vehicle",
+      "zh": "告诉我们您的车辆情况"
+    },
+    "vehicle_details": {
+      "en": "Vehicle Details",
+      "zh": "车辆详情"
+    },
+    "make": {
+      "en": "Make",
+      "zh": "品牌"
+    },
+    "model": {
+      "en": "Model",
+      "zh": "型号"
+    },
+    "year": {
+      "en": "Year",
+      "zh": "年份"
+    },
+    "type": {
+      "en": "Type",
+      "zh": "类型"
+    },
+    "primary_use": {
+      "en": "Primary Use",
+      "zh": "主要用途"
+    },
+    "annual_mileage": {
+      "en": "Annual Mileage (km)",
+      "zh": "年行驶里程（公里）"
+    },
+    "parking": {
+      "en": "Where is it usually parked?",
+      "zh": "通常停放在哪里？"
+    },
+    "garage": {
+      "en": "Private Garage",
+      "zh": "私人车库"
+    },
+    "driveway": {
+      "en": "Private Driveway",
+      "zh": "私人车道"
+    },
+    "street": {
+      "en": "Street",
+      "zh": "街道"
+    },
+    "parking_lot": {
+      "en": "Parking Lot",
+      "zh": "停车场"
+    },
+    "vehicle_features": {
+      "en": "Vehicle Features",
+      "zh": "车辆特性"
+    },
+    "anti_theft": {
+      "en": "Anti-theft Device",
+      "zh": "防盗装置"
+    },
+    "winter_tires": {
+      "en": "Winter Tires",
+      "zh": "冬季轮胎"
+    },
+    "additional_vehicle": {
+      "en": "Do you want to add another vehicle?",
+      "zh": "您想添加另一辆车吗？"
+    },
+    "add_vehicle": {
+      "en": "Add Vehicle",
+      "zh": "添加车辆"
+    }
+  },
+  
+  "coverage": {
+    "title": {
+      "en": "Coverage Selection",
+      "zh": "保险选择"
+    },
+    "subtitle": {
+      "en": "Customize your coverage",
+      "zh": "定制您的保险"
+    },
+    "mandatory": {
+      "en": "Mandatory Coverage",
+      "zh": "强制保险"
+    },
+    "optional": {
+      "en": "Optional Coverage",
+      "zh": "可选保险"
+    },
+    "liability": {
+      "en": "Liability Limit",
+      "zh": "责任限额"
+    },
+    "deductible": {
+      "en": "Deductible",
+      "zh": "免赔额"
+    },
+    "comprehensive": {
+      "en": "Comprehensive",
+      "zh": "综合保险"
+    },
+    "collision": {
+      "en": "Collision",
+      "zh": "碰撞险"
+    },
+    "endorsements": {
+      "en": "Endorsements & Add-ons",
+      "zh": "附加保障和选项"
+    },
+    "discounts": {
+      "en": "Available Discounts",
+      "zh": "可用折扣"
+    },
+    "apply_discount": {
+      "en": "Apply Discount",
+      "zh": "应用折扣"
+    }
+  },
+  
+  "quote_result": {
+    "title": {
+      "en": "Your Insurance Quote",
+      "zh": "您的保险报价"
+    },
+    "subtitle": {
+      "en": "Based on the information you provided",
+      "zh": "基于您提供的信息"
+    },
+    "quote_reference": {
+      "en": "Quote Reference",
+      "zh": "报价参考号"
+    },
+    "price_breakdown": {
+      "en": "Price Breakdown",
+      "zh": "价格明细"
+    },
+    "base_premium": {
+      "en": "Base Premium",
+      "zh": "基本保费"
+    },
+    "discounts": {
+      "en": "Discounts",
+      "zh": "折扣"
+    },
+    "fees": {
+      "en": "Fees",
+      "zh": "费用"
+    },
+    "taxes": {
+      "en": "Taxes",
+      "zh": "税费"
+    },
+    "total_premium": {
+      "en": "Total Premium",
+      "zh": "总保费"
+    },
+    "annual": {
+      "en": "Annual",
+      "zh": "年付"
+    },
+    "monthly": {
+      "en": "Monthly",
+      "zh": "月付"
+    },
+    "coverage_summary": {
+      "en": "Coverage Summary",
+      "zh": "保险摘要"
+    },
+    "email_quote": {
+      "en": "Email Quote",
+      "zh": "邮件发送报价"
+    },
+    "email_sent": {
+      "en": "Quote has been emailed to",
+      "zh": "报价已通过邮件发送至"
+    },
+    "start_over": {
+      "en": "Start Over",
+      "zh": "重新开始"
+    },
+    "modify_quote": {
+      "en": "Modify Quote",
+      "zh": "修改报价"
+    }
+  },
+  
+  "validation": {
+    "required": {
+      "en": "This field is required",
+      "zh": "此字段为必填项"
+    },
+    "email_invalid": {
+      "en": "Please enter a valid email address",
+      "zh": "请输入有效的电子邮箱地址"
+    },
+    "phone_invalid": {
+      "en": "Please enter a valid phone number",
+      "zh": "请输入有效的电话号码"
+    },
+    "postal_code_invalid": {
+      "en": "Please enter a valid postal code (e.g., A1A 1A1)",
+      "zh": "请输入有效的邮政编码（例如：A1A 1A1）"
+    },
+    "dob_invalid": {
+      "en": "You must be at least 16 years old",
+      "zh": "您必须至少年满16岁"
+    },
+    "number_invalid": {
+      "en": "Please enter a valid number",
+      "zh": "请输入有效的数字"
+    },
+    "max_exceeded": {
+      "en": "Value exceeds maximum limit",
+      "zh": "值超过最大限制"
+    }
+  }
+}

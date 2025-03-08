@@ -1,0 +1,68 @@
+@import 'primereact/resources/themes/lara-light-indigo/theme.css';
+@import 'primereact/resources/primereact.min.css';
+@import 'primeicons/primeicons.css';
+@import 'primeflex/primeflex.min.css';
+
+:root {
+  /* Professional theme (default) */
+  --primary-color: #1a365d;
+  --secondary-color: #4a5568;
+  --accent-color: #3182ce;
+  --background-color: #f7fafc;
+  --text-color: #2d3748;
+  --border-color: #e2e8f0;
+  --success-color: #2f855a;
+  --warning-color: #dd6b20;
+  --error-color: #e53e3e;
+  --info-color: #3182ce;
+}
+
+[data-theme='vibrant'] {
+  --primary-color: #38b2ac;
+  --secondary-color: #4fd1c5;
+  --accent-color: #f6ad55;
+  --background-color: #ffffff;
+  --text-color: #2d3748;
+  --border-color: #e6fffa;
+  --success-color: #68d391;
+  --warning-color: #fbd38d;
+  --error-color: #fc8181;
+  --info-color: #63b3ed;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--text-color);
+  background: var(--background-color);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Demo mode indicator */
+.demo-mode-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--warning-color);
+  color: #000;
+  text-align: center;
+  padding: 0.25rem;
+  z-index: 1000;
+  font-size: 0.875rem;
+}

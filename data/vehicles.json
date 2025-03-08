@@ -1,0 +1,425 @@
+{
+  "makes": [
+    {
+      "id": 1,
+      "name": "Toyota",
+      "models": [
+        {
+          "id": 101,
+          "name": "Corolla",
+          "types": ["Sedan", "Hatchback"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "compact",
+          "safety_rating": 4.5
+        },
+        {
+          "id": 102,
+          "name": "Camry",
+          "types": ["Sedan"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "midsize",
+          "safety_rating": 4.7
+        },
+        {
+          "id": 103,
+          "name": "RAV4",
+          "types": ["SUV"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "suv_small",
+          "safety_rating": 4.6
+        },
+        {
+          "id": 104,
+          "name": "Highlander",
+          "types": ["SUV"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "suv_large",
+          "safety_rating": 4.8
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Honda",
+      "models": [
+        {
+          "id": 201,
+          "name": "Civic",
+          "types": ["Sedan", "Hatchback"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "compact",
+          "safety_rating": 4.6
+        },
+        {
+          "id": 202,
+          "name": "Accord",
+          "types": ["Sedan"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "midsize",
+          "safety_rating": 4.8
+        },
+        {
+          "id": 203,
+          "name": "CR-V",
+          "types": ["SUV"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "suv_small",
+          "safety_rating": 4.7
+        },
+        {
+          "id": 204,
+          "name": "Pilot",
+          "types": ["SUV"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "suv_large",
+          "safety_rating": 4.5
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Ford",
+      "models": [
+        {
+          "id": 301,
+          "name": "Focus",
+          "types": ["Sedan", "Hatchback"],
+          "years": [2018, 2019, 2020],
+          "insurance_group": "compact",
+          "safety_rating": 4.1
+        },
+        {
+          "id": 302,
+          "name": "Fusion",
+          "types": ["Sedan"],
+          "years": [2018, 2019, 2020],
+          "insurance_group": "midsize",
+          "safety_rating": 4.4
+        },
+        {
+          "id": 303,
+          "name": "Escape",
+          "types": ["SUV"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "suv_small",
+          "safety_rating": 4.3
+        },
+        {
+          "id": 304,
+          "name": "Explorer",
+          "types": ["SUV"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "suv_large",
+          "safety_rating": 4.5
+        },
+        {
+          "id": 305,
+          "name": "F-150",
+          "types": ["Pickup"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "truck",
+          "safety_rating": 4.4
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Chevrolet",
+      "models": [
+        {
+          "id": 401,
+          "name": "Cruze",
+          "types": ["Sedan", "Hatchback"],
+          "years": [2018, 2019],
+          "insurance_group": "compact",
+          "safety_rating": 4.0
+        },
+        {
+          "id": 402,
+          "name": "Malibu",
+          "types": ["Sedan"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "midsize",
+          "safety_rating": 4.2
+        },
+        {
+          "id": 403,
+          "name": "Equinox",
+          "types": ["SUV"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "suv_small",
+          "safety_rating": 4.3
+        },
+        {
+          "id": 404,
+          "name": "Tahoe",
+          "types": ["SUV"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "suv_large",
+          "safety_rating": 4.4
+        },
+        {
+          "id": 405,
+          "name": "Silverado",
+          "types": ["Pickup"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "truck",
+          "safety_rating": 4.3
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Hyundai",
+      "models": [
+        {
+          "id": 501,
+          "name": "Elantra",
+          "types": ["Sedan"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "compact",
+          "safety_rating": 4.3
+        },
+        {
+          "id": 502,
+          "name": "Sonata",
+          "types": ["Sedan"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "midsize",
+          "safety_rating": 4.5
+        },
+        {
+          "id": 503,
+          "name": "Tucson",
+          "types": ["SUV"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "suv_small",
+          "safety_rating": 4.4
+        },
+        {
+          "id": 504,
+          "name": "Santa Fe",
+          "types": ["SUV"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "suv_large",
+          "safety_rating": 4.6
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Nissan",
+      "models": [
+        {
+          "id": 601,
+          "name": "Sentra",
+          "types": ["Sedan"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "compact",
+          "safety_rating": 4.1
+        },
+        {
+          "id": 602,
+          "name": "Altima",
+          "types": ["Sedan"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "midsize",
+          "safety_rating": 4.4
+        },
+        {
+          "id": 603,
+          "name": "Rogue",
+          "types": ["SUV"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "suv_small",
+          "safety_rating": 4.3
+        },
+        {
+          "id": 604,
+          "name": "Pathfinder",
+          "types": ["SUV"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "suv_large",
+          "safety_rating": 4.2
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Mazda",
+      "models": [
+        {
+          "id": 701,
+          "name": "Mazda3",
+          "types": ["Sedan", "Hatchback"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "compact",
+          "safety_rating": 4.5
+        },
+        {
+          "id": 702,
+          "name": "Mazda6",
+          "types": ["Sedan"],
+          "years": [2018, 2019, 2020, 2021],
+          "insurance_group": "midsize",
+          "safety_rating": 4.7
+        },
+        {
+          "id": 703,
+          "name": "CX-5",
+          "types": ["SUV"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "suv_small",
+          "safety_rating": 4.8
+        },
+        {
+          "id": 704,
+          "name": "CX-9",
+          "types": ["SUV"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "suv_large",
+          "safety_rating": 4.6
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Volkswagen",
+      "models": [
+        {
+          "id": 801,
+          "name": "Jetta",
+          "types": ["Sedan"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "compact",
+          "safety_rating": 4.2
+        },
+        {
+          "id": 802,
+          "name": "Passat",
+          "types": ["Sedan"],
+          "years": [2018, 2019, 2020, 2021, 2022],
+          "insurance_group": "midsize",
+          "safety_rating": 4.4
+        },
+        {
+          "id": 803,
+          "name": "Tiguan",
+          "types": ["SUV"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "suv_small",
+          "safety_rating": 4.3
+        },
+        {
+          "id": 804,
+          "name": "Atlas",
+          "types": ["SUV"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "suv_large",
+          "safety_rating": 4.5
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Subaru",
+      "models": [
+        {
+          "id": 901,
+          "name": "Impreza",
+          "types": ["Sedan", "Hatchback"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "compact",
+          "safety_rating": 4.4
+        },
+        {
+          "id": 902,
+          "name": "Legacy",
+          "types": ["Sedan"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "midsize",
+          "safety_rating": 4.6
+        },
+        {
+          "id": 903,
+          "name": "Forester",
+          "types": ["SUV"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "suv_small",
+          "safety_rating": 4.7
+        },
+        {
+          "id": 904,
+          "name": "Outback",
+          "types": ["Wagon", "SUV"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "suv_small",
+          "safety_rating": 4.8
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Kia",
+      "models": [
+        {
+          "id": 1001,
+          "name": "Forte",
+          "types": ["Sedan"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "compact",
+          "safety_rating": 4.2
+        },
+        {
+          "id": 1002,
+          "name": "Optima/K5",
+          "types": ["Sedan"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "midsize",
+          "safety_rating": 4.5
+        },
+        {
+          "id": 1003,
+          "name": "Sportage",
+          "types": ["SUV"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "suv_small",
+          "safety_rating": 4.3
+        },
+        {
+          "id": 1004,
+          "name": "Sorento",
+          "types": ["SUV"],
+          "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          "insurance_group": "suv_large",
+          "safety_rating": 4.5
+        }
+      ]
+    }
+  ],
+  
+  "insurance_group_factors": {
+    "compact": 1.0,
+    "midsize": 1.1,
+    "luxury": 1.4,
+    "sports": 1.6,
+    "suv_small": 1.2,
+    "suv_large": 1.3,
+    "truck": 1.25,
+    "van": 1.15
+  },
+  
+  "vehicle_age_factors": {
+    "0": 1.5,
+    "1": 1.4,
+    "2": 1.3,
+    "3": 1.2,
+    "4": 1.1,
+    "5": 1.0,
+    "6": 0.95,
+    "7": 0.9,
+    "8": 0.85,
+    "9": 0.8,
+    "10+": 0.75
+  }
+}
