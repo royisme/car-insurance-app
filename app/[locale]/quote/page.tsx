@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import Header from '@/app/../components/Header';
-import QuoteSteps from '@/app/../components/QuoteSteps';
+import Header from '@/app/components/Header';
+import QuoteSteps from '@/app/components/QuoteSteps';
 import DriverInfoForm from './components/DriverInfoForm';
 import VehicleInfoForm from './components/VehicleInfoForm';
 import CoverageForm from './components/CoverageForm';

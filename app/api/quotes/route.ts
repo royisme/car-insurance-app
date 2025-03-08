@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
-import calculatePremium from '@/app/../lib/calculatePremium';
+import calculatePremium from '@/app/lib/calculatePremium';
 
 const prisma = new PrismaClient();
 
