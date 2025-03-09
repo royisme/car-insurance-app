@@ -776,12 +776,7 @@ export default function CoverageForm({
         onHide={() => setShowQuoteDialog(false)}
         footer={
           <div className="flex justify-between w-full">
-            <Button 
-              label={t('quote_result.view_quote')} 
-              icon="pi pi-eye" 
-              className="p-button-sm" 
-              onClick={() => router.push(`/quote/view/${quoteReference}`)}
-            />
+
             <Button 
               label={t('common.close')} 
               icon="pi pi-times" 

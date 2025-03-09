@@ -8,7 +8,7 @@ interface VehicleCardProps {
   type?: string;
   makes: Array<{id: number; name: string}>;
   models: Array<{id: number; name: string}>;
-  vehicleUses: Array<{id: string; label: string}>;
+  vehicleUses: Array<{id: string; label?: string}>;
   primaryUse?: string;
   annualMileage?: number;
   parking?: string;
@@ -84,10 +84,10 @@ const VehicleCard: React.FC<VehicleCardProps> = ({
   const modelName = models.find(m => m.id === model)?.name || '';
   
   // 获取使用用途名称
-  const primaryUseLabel = vehicleUses.find(u => u.id === primaryUse)?.label || '';
+  const primaryUseLabel = primaryUse || '';
   
   return (
-    <div className="mt-2mb-2 bg-blue-350 rounded-lg border-2 border-primary-200 overflow-hidden">
+    <div className="mt-2mb-2 bg-blue-350 round  ed-lg border-2 border-primary-200 overflow-hidden">
       {/* 车辆标题区域 */}
       <div className="p-4 text-center">
         <h2 className="text-2xl font-bold text-gray-800">
