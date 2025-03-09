@@ -159,9 +159,9 @@ export default function ResultPage() {
           </div>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid">
           {/* 左列 - 报价详情 */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="col-12 lg:col-8 space-y-6">
             {/* 驾驶员信息 */}
             <Panel 
               header={
@@ -180,8 +180,8 @@ export default function ResultPage() {
               }
               toggleable
             >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="info-section">
+              <div className="grid">
+                <div className="col-12 md:col-6 info-section">
                   <h4 className="info-section-title">
                     {t('driver_info.personal_details')}
                   </h4>
@@ -192,7 +192,7 @@ export default function ResultPage() {
                   </div>
                 </div>
                 
-                <div className="info-section">
+                <div className="col-12 md:col-6 info-section">
                   <h4 className="info-section-title">
                     {t('driver_info.address')}
                   </h4>
@@ -215,8 +215,8 @@ export default function ResultPage() {
               }
               toggleable
             >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="info-section">
+              <div className="grid">
+                <div className="col-12 md:col-6 info-section">
                   <h4 className="info-section-title">
                     {t('vehicle_info.vehicle_details')}
                   </h4>
@@ -226,7 +226,7 @@ export default function ResultPage() {
                   </div>
                 </div>
                 
-                <div className="info-section">
+                <div className="col-12 md:col-6 info-section">
                   <h4 className="info-section-title">
                     {t('vehicle_info.primary_use')}
                   </h4>
@@ -255,7 +255,7 @@ export default function ResultPage() {
                   <h4 className="font-bold" style={{ color: 'var(--primary-color)' }}>{t('coverage.mandatory')}</h4>
                 </div>
                 
-                <div className="info-section">
+                <div className="col-12 md:col-6 info-section">
                   {quoteData?.coverages.mandatory.map((coverage: any, index: number) => (
                     <div key={coverage.id} className={`${index > 0 ? 'mt-3 pt-3 border-t' : ''}`} style={{ borderColor: 'var(--border-color)' }}>
                       <div className="flex justify-between items-center">
@@ -285,7 +285,7 @@ export default function ResultPage() {
                     <h4 className="font-bold" style={{ color: 'var(--info-color)' }}>{t('coverage.optional')}</h4>
                   </div>
                   
-                  <div className="info-section">
+                  <div className="col-12 md:col-6 info-section">
                     {quoteData?.coverages.optional.map((coverage: any, index: number) => (
                       <div key={coverage.id} className={`${index > 0 ? 'mt-3 pt-3 border-t' : ''}`} style={{ borderColor: 'var(--border-color)' }}>
                         <div className="flex justify-between items-center">
@@ -321,7 +321,7 @@ export default function ResultPage() {
                     <h4 className="font-bold" style={{ color: 'var(--secondary-color)' }}>{t('coverage.endorsements')}</h4>
                   </div>
                   
-                  <div className="info-section">
+                  <div className="col-12 md:col-6 info-section">
                     {quoteData?.coverages.endorsements.map((endorsement: any, index: number) => (
                       <div key={endorsement.id} className={`${index > 0 ? 'mt-3 pt-3 border-t' : ''}`} style={{ borderColor: 'var(--border-color)' }}>
                         <div className="flex justify-between items-center">
@@ -351,7 +351,7 @@ export default function ResultPage() {
                     <h4 className="font-bold" style={{ color: 'var(--success-color)' }}>{t('coverage.discounts')}</h4>
                   </div>
                   
-                  <div className="info-section">
+                  <div className="col-12 md:col-6 info-section">
                     {quoteData?.coverages.discounts.map((discount: any, index: number) => (
                       <div key={discount.id} className={`${index > 0 ? 'mt-3 pt-3 border-t' : ''}`} style={{ borderColor: 'var(--border-color)' }}>
                         <div className="flex justify-between items-center">
@@ -373,7 +373,7 @@ export default function ResultPage() {
           </div>
           
           {/* 右列 - 价格摘要 */}
-          <div>
+          <div className="col-12 lg:col-4">
             <div className="price-breakdown-card">
               <div className="price-breakdown-header">
                 <h2 className="price-breakdown-title">{t('quote_result.price_breakdown')}</h2>

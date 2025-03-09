@@ -103,9 +103,9 @@ export default function DriverInfoForm({ initialData, onNext }: DriverInfoFormPr
         <div className="card mb-6">
           <h3 className="text-xl font-semibold mb-4">{t('driver_info.personal_details')}</h3>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div className="grid mb-4">
             {/* First Name */}
-            <div className="field">
+            <div className="field col-12 md:col-6">
               <label htmlFor="firstName" className="block font-medium mb-2">
                 {t('driver_info.first_name')} *
               </label>
@@ -121,7 +121,7 @@ export default function DriverInfoForm({ initialData, onNext }: DriverInfoFormPr
             </div>
             
             {/* Last Name */}
-            <div className="field">
+            <div className="field col-12 md:col-6">
               <label htmlFor="lastName" className="block font-medium mb-2">
                 {t('driver_info.last_name')} *
               </label>
@@ -137,9 +137,9 @@ export default function DriverInfoForm({ initialData, onNext }: DriverInfoFormPr
             </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div className="grid mb-4">
             {/* Email */}
-            <div className="field">
+            <div className="field col-12 md:col-6">
               <label htmlFor="email" className="block font-medium mb-2">
                 {t('driver_info.email')} *
               </label>
@@ -155,7 +155,7 @@ export default function DriverInfoForm({ initialData, onNext }: DriverInfoFormPr
             </div>
             
             {/* Phone */}
-            <div className="field">
+            <div className="field col-12 md:col-6">
               <label htmlFor="phone" className="block font-medium mb-2">
                 {t('driver_info.phone')}
               </label>
@@ -169,9 +169,9 @@ export default function DriverInfoForm({ initialData, onNext }: DriverInfoFormPr
             </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div className="grid mb-4">
             {/* Date of Birth */}
-            <div className="field">
+            <div className="field col-12 md:col-6">
               <label htmlFor="dateOfBirth" className="block font-medium mb-2">
                 {t('driver_info.dob')} *
               </label>
@@ -190,7 +190,7 @@ export default function DriverInfoForm({ initialData, onNext }: DriverInfoFormPr
             </div>
             
             {/* Gender */}
-            <div className="field">
+            <div className="field col-12 md:col-6">
               <label htmlFor="gender" className="block font-medium mb-2">
                 {t('driver_info.gender')} *
               </label>
@@ -245,9 +245,9 @@ export default function DriverInfoForm({ initialData, onNext }: DriverInfoFormPr
             />
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+          <div className="grid mb-4">
             {/* City */}
-            <div className="field">
+            <div className="field col-12 md:col-6">
               <label htmlFor="city" className="block font-medium mb-2">
                 {t('driver_info.city')} *
               </label>
@@ -263,7 +263,7 @@ export default function DriverInfoForm({ initialData, onNext }: DriverInfoFormPr
             </div>
             
             {/* Province */}
-            <div className="field">
+            <div className="field col-12 md:col-6">
               <label htmlFor="province" className="block font-medium mb-2">
                 {t('driver_info.province')} *
               </label>
@@ -283,7 +283,7 @@ export default function DriverInfoForm({ initialData, onNext }: DriverInfoFormPr
             </div>
             
             {/* Postal Code */}
-            <div className="field">
+            <div className="field col-12 md:col-6">
               <label htmlFor="postalCode" className="block font-medium mb-2">
                 {t('driver_info.postal_code')} *
               </label>
@@ -306,9 +306,9 @@ export default function DriverInfoForm({ initialData, onNext }: DriverInfoFormPr
         <div className="card mb-6">
           <h3 className="text-xl font-semibold mb-4">{t('driver_info.driving_history')}</h3>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div className="grid mb-4">
             {/* Years Licensed */}
-            <div className="field">
+            <div className="field col-12 md:col-6">
               <label htmlFor="licenseYears" className="block font-medium mb-2">
                 {t('driver_info.license_years')} *
               </label>
@@ -336,7 +336,7 @@ export default function DriverInfoForm({ initialData, onNext }: DriverInfoFormPr
             </div>
             
             {/* At-fault Accidents */}
-            <div className="field">
+            <div className="field col-12 md:col-6">
               <label htmlFor="accidents3Years" className="block font-medium mb-2">
                 {t('driver_info.accidents_3years')}
               </label>
@@ -360,9 +360,9 @@ export default function DriverInfoForm({ initialData, onNext }: DriverInfoFormPr
             </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div className="grid mb-4">
             {/* Traffic Violations */}
-            <div className="field">
+            <div className="field col-12 md:col-6">
               <label htmlFor="violations3Years" className="block font-medium mb-2">
                 {t('driver_info.violations_3years')}
               </label>
@@ -386,7 +386,7 @@ export default function DriverInfoForm({ initialData, onNext }: DriverInfoFormPr
             </div>
             
             {/* Insurance Claims */}
-            <div className="field">
+            <div className="field col-12 md:col-6">
               <label htmlFor="claims3Years" className="block font-medium mb-2">
                 {t('driver_info.claims_3years')}
               </label>

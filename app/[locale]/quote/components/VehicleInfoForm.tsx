@@ -281,9 +281,9 @@ export default function VehicleInfoForm({ initialData, onNext, onBack }: Vehicle
           
           {/* Vehicle Selection Tree */}
             <div className="p-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid">
                 {/* Vehicle Make Selection */}
-                <div>
+                <div className="col-12 md:col-6">
                   <label htmlFor="make" className="block text-sm font-medium text-gray-700 mb-1">
                     {t('vehicle_info.make')} *
                   </label>
@@ -318,7 +318,7 @@ export default function VehicleInfoForm({ initialData, onNext, onBack }: Vehicle
                 </div>
 
                 {/* Vehicle Model Selection */}
-                <div>
+                <div className="col-12 md:col-6">
                   <label htmlFor="model" className="block text-sm font-medium text-gray-700 mb-1">
                     {t('vehicle_info.model')} *
                   </label>
@@ -353,7 +353,7 @@ export default function VehicleInfoForm({ initialData, onNext, onBack }: Vehicle
                 </div>
 
                 {/* Vehicle Year Selection */}
-                <div>
+                <div className="col-12 md:col-6">
                   <label htmlFor="year" className="block text-sm font-medium text-gray-700 mb-1">
                     {t('vehicle_info.year')} *
                   </label>
@@ -382,7 +382,7 @@ export default function VehicleInfoForm({ initialData, onNext, onBack }: Vehicle
                 </div>
 
                 {/* Vehicle Type Selection */}
-                <div>
+                <div className="col-12 md:col-6">
                   <label htmlFor="type" className="block text-sm font-medium text-gray-700 mb-1">
                     {t('vehicle_info.type')} *
                   </label>
@@ -452,9 +452,9 @@ export default function VehicleInfoForm({ initialData, onNext, onBack }: Vehicle
             </div>
 
             <div className="p-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid">
                 {/* Primary Use */}
-                <div>
+                <div className="col-12 md:col-6">
                   <label htmlFor="primaryUse" className="block text-sm font-medium text-gray-700 mb-1">
                     {t('vehicle_info.primary_use')} *
                   </label>
@@ -480,7 +480,7 @@ export default function VehicleInfoForm({ initialData, onNext, onBack }: Vehicle
                 </div>
 
                 {/* Annual Mileage */}
-                <div>
+                <div className="col-12 md:col-6">
                   <label htmlFor="annualMileage" className="block text-sm font-medium text-gray-700 mb-1">
                     {t('vehicle_info.annual_mileage')}
                   </label>

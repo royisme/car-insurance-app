@@ -123,7 +123,7 @@ export default function Header() {
                   />
                 </div>
                 
-                {/* {process.env.NODE_ENV === 'development' && ( */}
+                {process.env.NODE_ENV === 'development' && (
                   <div className="flex align-items-center">
                     <span className="text-white mr-2 text-sm">{t('landing.demo_mode')}</span>
                     <InputSwitch
@@ -131,7 +131,7 @@ export default function Header() {
                       onChange={(e) => toggleDemoMode(e.value as boolean)}
                     />
                   </div>
-                {/* )} */}
+                )}
               </div>
             </div>
           </div>
