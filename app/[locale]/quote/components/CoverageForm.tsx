@@ -35,12 +35,41 @@ export default function CoverageForm({
   
   // Form state
   const [formData, setFormData] = useState<any>({
-    mandatoryCoverages: {},
+    mandatoryCoverages: {
+      // 为Third-Party Liability设置默认值
+      'third_party_liability': {
+        amount: 1000000,
+        selected: true
+      }
+    },
     optionalCoverages: {},
     endorsements: {},
     discounts: {},
     ...initialData
   });
+  
+  // 确保Third-Party Liability有默认值
+  useEffect(() => {
+    // 在组件挂载时直接设置默认值
+    setFormData((prevData: any) => {
+      // 检查是否已经有Third-Party Liability的值
+      if (prevData.mandatoryCoverages?.['third_party_liability']?.amount) {
+        return prevData; // 如果已经有值，不做任何更改
+      }
+      
+      // 如果没有，设置默认值
+      return {
+        ...prevData,
+        mandatoryCoverages: {
+          ...prevData.mandatoryCoverages,
+          'third_party_liability': {
+            amount: 1000000,
+            selected: true
+          }
+        }
+      };
+    });
+  }, []);
   
   // Data for coverage options
   const [mandatoryCoverages, setMandatoryCoverages] = useState<any[]>([]);
@@ -72,12 +101,39 @@ export default function CoverageForm({
           // 检查API响应数据
           console.log('Coverage API response:', coverageData);
           
+          // 立即设置Third-Party Liability的默认值
+          const thirdPartyLiability = coverageData.mandatory?.find((c: any) => c.id === 'third_party_liability');
+          if (thirdPartyLiability) {
+            console.log('Found Third-Party Liability in API response:', thirdPartyLiability);
+            // 确保立即更新formData，不等待其他处理
+            setFormData((prevData: any) => {
+              // 首先检查Third-Party Liability的默认值
+              const defaultAmount = thirdPartyLiability.defaultAmount;
+              console.log('Third-Party Liability default amount:', defaultAmount);
+              
+              // 将字符串转换为数字
+              const amountValue = defaultAmount ? parseInt(defaultAmount) : 1000000;
+              console.log('Using amount value for Third-Party Liability:', amountValue);
+              
+              return {
+                ...prevData,
+                mandatoryCoverages: {
+                  ...prevData.mandatoryCoverages,
+                  'third_party_liability': {
+                    amount: amountValue,
+                    selected: true
+                  }
+                }
+              };
+            });
+          }
+          
           setMandatoryCoverages(coverageData.mandatory || []);
           setOptionalCoverages(coverageData.optional || []);
           setEndorsements(coverageData.endorsements || []);
           
           // Initialize mandatory coverages with defaults
-          if (Object.keys(formData.mandatoryCoverages).length === 0 && coverageData.mandatory) {
+          if (coverageData.mandatory) {
             const mandatoryDefaults: any = {};
             
             coverageData.mandatory.forEach((coverage: any) => {
@@ -96,7 +152,14 @@ export default function CoverageForm({
                   selected: true
                 };
                 console.log(`Setting default for ${coverage.id}:`, mandatoryDefaults[coverage.id]);
-              } 
+              } else if (coverage.id === 'third_party_liability') {
+                // 第三方责任需要特殊处理，确保有默认值
+                mandatoryDefaults[coverage.id] = {
+                  amount: parseInt(coverage.defaultAmount) || 1000000,
+                  selected: true
+                };
+                console.log(`Setting default for ${coverage.id}:`, mandatoryDefaults[coverage.id]);
+              }
               else if (coverage.defaultAmount) {
                 mandatoryDefaults[coverage.id] = {
                   amount: coverage.defaultAmount,
@@ -398,22 +461,51 @@ export default function CoverageForm({
                     
                     {coverage.options && coverage.options.length > 0 && (
                       <div className="min-w-[130px]">
-                        {coverage.defaultAmount && (
+                        {(coverage.defaultAmount || coverage.id === 'third_party_liability') && (
                           <div>
                             <label className="block text-xs mb-1" style={{ color: 'var(--secondary-color)' }}>
                               {coverage.id === 'direct_compensation_property_damage' 
                                 ? t('coverage.coverage_level')
                                 : coverage.name_en.includes('Accident') 
                                   ? t('coverage.liability') 
-                                  : t('coverage.deductible')}
+                                  : coverage.id === 'third_party_liability'
+                                    ? t('coverage.liability')
+                                    : t('coverage.deductible')}
                             </label>
                             <Dropdown
                               value={
-                                ['direct_compensation_property_damage', 'accident_benefits', 'uninsured_automobile'].includes(coverage.id)
-                                  ? formData.mandatoryCoverages[coverage.id]?.level || coverage.defaultAmount || 'standard'
-                                  : formData.mandatoryCoverages[coverage.id]?.amount || coverage.defaultAmount || 50000
+                                (() => {
+                                  // 对Third-Party Liability特殊处理
+                                  if (coverage.id === 'third_party_liability') {
+                                    const value = formData.mandatoryCoverages[coverage.id]?.amount;
+                                    console.log('Third-Party Liability dropdown value:', value);
+                                    // 确保有一个默认值
+                                    return value || 1000000;
+                                  }
+                                  
+                                  // 其他使用level的保险
+                                  if (['direct_compensation_property_damage', 'accident_benefits', 'uninsured_automobile'].includes(coverage.id)) {
+                                    return formData.mandatoryCoverages[coverage.id]?.level || coverage.defaultAmount || 'standard';
+                                  }
+                                  
+                                  // 其他保险
+                                  return formData.mandatoryCoverages[coverage.id]?.amount || coverage.defaultAmount || 50000;
+                                })()
                               }
                               options={coverage.options.map((option: any) => {
+                                // 处理Third-Party Liability的选项
+                                if (coverage.id === 'third_party_liability') {
+                                  console.log('Third-Party Liability option:', option);
+                                  // 确保数字类型
+                                  const amount = typeof option.amount === 'string' ? parseInt(option.amount) : option.amount;
+                                  // 打印每个选项的值类型
+                                  console.log(`Option amount: ${amount}, type: ${typeof amount}`);
+                                  return {
+                                    label: `$${amount.toLocaleString()}`,
+                                    value: amount
+                                  };
+                                }
+                                
                                 // 处理直接赔偿财产损失、意外伤害保险和无保险驾驶人 - 使用level
                                 if (['direct_compensation_property_damage', 'accident_benefits', 'uninsured_automobile'].includes(coverage.id)) {
                                   let levelText = '';
@@ -680,10 +772,10 @@ export default function CoverageForm({
       <Dialog 
         header={t('quote_result.title')} 
         visible={showQuoteDialog} 
-        style={{ width: '90%', maxWidth: '900px' }} 
+        style={{ width: '90%', maxWidth: '500px' }} 
         onHide={() => setShowQuoteDialog(false)}
         footer={
-          <div className="flex justify-between">
+          <div className="flex justify-between w-full">
             <Button 
               label={t('quote_result.view_quote')} 
               icon="pi pi-eye" 
@@ -698,16 +790,26 @@ export default function CoverageForm({
             />
           </div>
         }
-        className="email-dialog"
+        className="quote-success-dialog"
+        contentClassName="p-0"
+        headerClassName="text-center bg-primary-50"
       >
-        <div className="p-4 text-center">
-          <i className="pi pi-check-circle text-5xl mb-3" style={{ color: 'var(--success-color)' }}></i>
-          <p className="mb-4">{t('quote_result.success_message')}</p>
-          <div className="p-3 rounded-lg mb-3 quote-reference-container">
-            <h4 className="text-lg font-bold mb-1">{t('quote_result.quote_reference')}</h4>
-            <p className="text-xl font-mono quote-reference-number">{quoteReference}</p>
+        <div className="p-6 text-center">
+          <div className="flex justify-center mb-4">
+            <div className="w-16 h-16 rounded-full bg-success-100 flex items-center justify-center">
+              <i className="pi pi-check-circle text-4xl" style={{ color: 'var(--success-color)' }}></i>
+            </div>
           </div>
-          <p className="text-sm" style={{ color: 'var(--secondary-color)' }}>{t('quote_result.save_reference')}</p>
+          <h3 className="text-xl font-semibold mb-4">{t('quote_result.success_message')}</h3>
+          
+          <div className="bg-gray-50 p-4 rounded-lg mb-4 border border-gray-200">
+            <h4 className="text-md font-bold mb-2 text-gray-700">{t('quote_result.quote_reference')}</h4>
+            <div className="bg-white p-3 rounded border border-gray-300">
+              <p className="text-xl font-mono font-semibold break-all">{quoteReference}</p>
+            </div>
+          </div>
+          
+          <p className="text-sm text-gray-600 mb-2">{t('quote_result.save_reference')}</p>
         </div>
       </Dialog>
     </div>

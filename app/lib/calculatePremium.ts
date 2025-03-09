@@ -80,14 +80,14 @@ export default async function calculatePremium(
     vehicleUsage = vehicleUsage || {
       id: vehicleInfo.primaryUse || 'commute',
       name: 'Commute',
-      factor: 1.2
+      premium_factor: 1.2
     };
     
     // Default values for other variables
     driverFactors = driverFactors || {
-      age_factor: 1.0,
-      experience_factor: 1.0,
-      history_factor: 1.0
+      ageGroup: { premium_factor: 1.0 },
+      experience: { premium_factor: 1.0 },
+      history: { premium_factor: 1.0 }
     };
     
     coverages = coverages || {
@@ -307,6 +307,27 @@ function calculateBasePremium(
  * Get insurance group factor
  */
 function getInsuranceGroupFactor(group: string) {
+  // Handle 'Group X' format
+  if (group && group.startsWith('Group ')) {
+    const groupNumber = parseInt(group.replace('Group ', ''), 10);
+    if (!isNaN(groupNumber)) {
+      // Groups 1-5 are low risk (0.8-1.0)
+      // Groups 6-10 are medium risk (1.0-1.2)
+      // Groups 11-15 are high risk (1.2-1.4)
+      // Groups 16-20 are very high risk (1.4-1.6)
+      if (groupNumber <= 5) {
+        return 0.8 + (groupNumber - 1) * 0.05; // 0.8, 0.85, 0.9, 0.95, 1.0
+      } else if (groupNumber <= 10) {
+        return 1.0 + (groupNumber - 6) * 0.05; // 1.0, 1.05, 1.1, 1.15, 1.2
+      } else if (groupNumber <= 15) {
+        return 1.2 + (groupNumber - 11) * 0.05; // 1.2, 1.25, 1.3, 1.35, 1.4
+      } else {
+        return 1.4 + Math.min(groupNumber - 16, 4) * 0.05; // 1.4, 1.45, 1.5, 1.55, 1.6
+      }
+    }
+  }
+  
+  // Fallback to vehicle type factors if not a group
   const factors: Record<string, number> = {
     'compact': 1.0,
     'midsize': 1.1,

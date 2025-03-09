@@ -42,7 +42,7 @@ export default function VehicleInfoForm({ initialData, onNext, onBack }: Vehicle
     model: '',
     year: null,
     type: '',
-    primaryUse: 'commute',
+    primaryUse: 'commute_short',
     annualMileage: 15000,
     parking: '',
     antiTheft: false,
@@ -70,9 +70,10 @@ export default function VehicleInfoForm({ initialData, onNext, onBack }: Vehicle
   const [vehicleUses, setVehicleUses] = useState<Array<{id: string}>>([]);
   
   const vehicleUsesData = [
-    { id: 'commute' },
-    { id: 'pleasure'},
-    { id: 'business'}
+    { id: 'commute_short', label: t('vehicle_info.commute_short') },
+    { id: 'commute_long', label: t('vehicle_info.commute_long') },
+    { id: 'pleasure', label: t('vehicle_info.pleasure') },
+    { id: 'business', label: t('vehicle_info.business') }
   ];
   // Validation state
   const [submitted, setSubmitted] = useState(false);
@@ -95,7 +96,7 @@ export default function VehicleInfoForm({ initialData, onNext, onBack }: Vehicle
         
         // Make sure primaryUse is set
         if (!formData.primaryUse) {
-          setFormData((prev: VehicleFormData) => ({ ...prev, primaryUse: 'commute' }));
+          setFormData((prev: VehicleFormData) => ({ ...prev, primaryUse: 'commute_short' }));
         }
         
         // If we have initial data, load dependent fields

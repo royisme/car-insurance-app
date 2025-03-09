@@ -45,6 +45,8 @@ export async function POST(request: Request) {
             year: vehicleInfo.year,
             modelId: vehicleInfo.model,
             type: vehicleInfo.type,
+            // 使用前端传递的primaryUse作为vehicleUsageId
+            // 数据库中有 commute_short, commute_long, pleasure, business 这些记录
             vehicleUsageId: vehicleInfo.primaryUse,
             annualMileage: vehicleInfo.annualMileage,
             parking: vehicleInfo.parking,
