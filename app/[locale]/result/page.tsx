@@ -116,7 +116,7 @@ export default function ResultPage() {
         disabled={sendingEmail}
       />
       <Button
-        label={t('common.send')}
+        label={t('common.sendEmail')}
         icon="pi pi-envelope"
         onClick={sendQuoteEmail}
         loading={sendingEmail}

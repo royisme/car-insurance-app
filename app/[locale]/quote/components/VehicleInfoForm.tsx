@@ -10,6 +10,7 @@ import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
 
 import { generateVehicleInfo } from '@/app/utils/demoDataGenerator';
+import VehicleCard from './CarSummary';
 
 // Props interface
 interface VehicleInfoFormProps {
@@ -18,11 +19,25 @@ interface VehicleInfoFormProps {
   onBack: () => void;
 }
 
+// Define the form data interface
+interface VehicleFormData {
+  make: number | string | null;
+  model: number | string | null;
+  year: number | null;
+  type: string;
+  primaryUse: string;
+  annualMileage: number;
+  parking: string;
+  antiTheft: boolean;
+  winterTires: boolean;
+  [key: string]: any; // For dynamic field access
+}
+
 export default function VehicleInfoForm({ initialData, onNext, onBack }: VehicleInfoFormProps) {
   const t = useTranslations();
   
   // Form state
-  const [formData, setFormData] = useState<any>({
+  const [formData, setFormData] = useState<VehicleFormData>({
     make: '',
     model: '',
     year: null,
@@ -34,14 +49,31 @@ export default function VehicleInfoForm({ initialData, onNext, onBack }: Vehicle
     winterTires: false,
     ...initialData
   });
+  // parking options
+  const parkingOptions = [
+    { id: 'garage', value: 'garage', label: t('vehicle_info.garage') },
+    { id: 'driveway', value: 'driveway', label: t('vehicle_info.driveway') },
+    { id: 'street', value: 'street', label: t('vehicle_info.street') },
+    { id: 'parking_lot', value: 'parking_lot', label: t('vehicle_info.parking_lot') }
+  ];
   
+  // vehicle features options
+  const featureOptions = [
+    { id: 'antiTheft', name: 'antiTheft', label: t('vehicle_info.anti_theft') },
+    { id: 'winterTires', name: 'winterTires', label: t('vehicle_info.winter_tires') }
+  ]
   // Data for dropdowns
   const [makes, setMakes] = useState<Array<{id: number; name: string}>>([]);
   const [models, setModels] = useState<Array<{id: number; name: string}>>([]);
   const [years, setYears] = useState<number[]>([]);
   const [types, setTypes] = useState<string[]>([]);
-  const [vehicleUses, setVehicleUses] = useState<Array<{id: string; name_en: string; name_zh: string}>>([]);
+  const [vehicleUses, setVehicleUses] = useState<Array<{id: string}>>([]);
   
+  const vehicleUsesData = [
+    { id: 'commute' },
+    { id: 'pleasure'},
+    { id: 'business'}
+  ];
   // Validation state
   const [submitted, setSubmitted] = useState(false);
   
@@ -51,27 +83,28 @@ export default function VehicleInfoForm({ initialData, onNext, onBack }: Vehicle
       try {
         // Fetch makes
         const makesResponse = await fetch('/api/vehicles/makes');
+        if (!makesResponse.ok) {
+          throw new Error(`HTTP error! status: ${makesResponse.status}`);
+        }
         const makesData = await makesResponse.json();
+        console.log('Makes fetched:', makesData);
         setMakes(makesData);
-        
-        // We'll use hardcoded vehicle uses instead of fetching from API
-        // since the API seems to be returning problematic data
-        setVehicleUses([
-          { id: 'commute', name_en: 'Commute to Work', name_zh: '上下班通勤' },
-          { id: 'pleasure', name_en: 'Pleasure', name_zh: '休闲' },
-          { id: 'business', name_en: 'Business', name_zh: '商务' }
-        ]);
+
+        // set vehicle uses
+        setVehicleUses(vehicleUsesData);
         
         // Make sure primaryUse is set
         if (!formData.primaryUse) {
-          setFormData((prev: any) => ({ ...prev, primaryUse: 'commute' }));
+          setFormData((prev: VehicleFormData) => ({ ...prev, primaryUse: 'commute' }));
         }
         
         // If we have initial data, load dependent fields
         if (initialData.make) {
+          console.log('Initial make found:', initialData.make);
           await loadModels(initialData.make);
           
           if (initialData.model) {
+            console.log('Initial model found:', initialData.model);
             await loadYearsAndTypes(initialData.make, initialData.model);
           }
         }
@@ -86,6 +119,7 @@ export default function VehicleInfoForm({ initialData, onNext, onBack }: Vehicle
     const demoMode = localStorage.getItem('demo-mode') === 'true';
     if (demoMode && !initialData.make) {
       const randomVehicleData = generateVehicleInfo();
+      console.log('Demo mode: setting random vehicle data', randomVehicleData);
       setFormData(randomVehicleData);
       
       // Load related data for demo mode
@@ -101,24 +135,53 @@ export default function VehicleInfoForm({ initialData, onNext, onBack }: Vehicle
   
   // Load models when make changes
   useEffect(() => {
+    console.log('Make changed effect triggered, make:', formData.make);
     if (formData.make) {
       loadModels(formData.make);
+    } else {
+      // Clear dependent fields if make is cleared
+      setModels([]);
+      setYears([]);
+      setTypes([]);
     }
   }, [formData.make]);
   
   // Load years and types when model changes
   useEffect(() => {
+    console.log('Model changed effect triggered, model:', formData.model);
     if (formData.make && formData.model) {
       loadYearsAndTypes(formData.make, formData.model);
+    } else {
+      // Clear dependent fields if model is cleared
+      setYears([]);
+      setTypes([]);
     }
   }, [formData.model]);
   
   // Load models for selected make
-  const loadModels = async (makeId: number) => {
+  const loadModels = async (makeId: number | string) => {
+    // Ensure makeId is a number
+    const numericMakeId = typeof makeId === 'string' ? parseInt(makeId, 10) : makeId;
     try {
-      const response = await fetch(`/api/vehicles/makes/${makeId}/models`);
+      console.log('Loading models for make ID:', numericMakeId);
+      const response = await fetch(`/api/vehicles/makes/${numericMakeId}/models`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const data = await response.json();
+      console.log('Models received:', data);
       setModels(data);
+      
+      // If we have a previously selected model that doesn't belong to this make, clear it
+      if (formData.model) {
+        const modelExists = data.some((model: any) => model.id === formData.model);
+        console.log('Current model ID:', formData.model, 'Exists in new models:', modelExists);
+        if (!modelExists) {
+          updateFormData('model', null);
+          updateFormData('year', null);
+          updateFormData('type', '');
+        }
+      }
     } catch (error) {
       console.error('Error fetching models:', error);
       setModels([]);
@@ -126,12 +189,45 @@ export default function VehicleInfoForm({ initialData, onNext, onBack }: Vehicle
   };
   
   // Load years and types for selected model
-  const loadYearsAndTypes = async (makeId: number, modelId: number) => {
+  const loadYearsAndTypes = async (makeId: number | string, modelId: number | string) => {
+    // Ensure makeId and modelId are numbers
+    const numericMakeId = typeof makeId === 'string' ? parseInt(makeId, 10) : makeId;
+    const numericModelId = typeof modelId === 'string' ? parseInt(modelId, 10) : modelId;
     try {
-      const response = await fetch(`/api/vehicles/makes/${makeId}/models/${modelId}`);
+      console.log('Loading years and types for make ID:', numericMakeId, 'model ID:', numericModelId);
+      const response = await fetch(`/api/vehicles/makes/${numericMakeId}/models/${numericModelId}`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const data = await response.json();
-      setYears(data.years || []);
-      setTypes(data.types || []);
+      console.log('Years and types received:', data);
+      
+      // Ensure years is an array of numbers
+      const yearsArray = Array.isArray(data.years) ? data.years : [];
+      console.log('Setting years array:', yearsArray);
+      setYears(yearsArray);
+      
+      // Ensure types is an array of strings
+      const typesArray = Array.isArray(data.types) ? data.types : [];
+      console.log('Setting types array:', typesArray);
+      setTypes(typesArray);
+      
+      // If previously selected year or type is not in the new arrays, clear them
+      if (formData.year) {
+        const yearExists = yearsArray.includes(formData.year);
+        console.log('Current year:', formData.year, 'Exists in new years:', yearExists);
+        if (!yearExists) {
+          updateFormData('year', null);
+        }
+      }
+      
+      if (formData.type) {
+        const typeExists = typesArray.includes(formData.type);
+        console.log('Current type:', formData.type, 'Exists in new types:', typeExists);
+        if (!typeExists) {
+          updateFormData('type', '');
+        }
+      }
     } catch (error) {
       console.error('Error fetching model details:', error);
       setYears([]);
@@ -141,7 +237,11 @@ export default function VehicleInfoForm({ initialData, onNext, onBack }: Vehicle
   
   // Update form data
   const updateFormData = (field: string, value: any) => {
-    setFormData({ ...formData, [field]: value });
+    console.log(`Updating ${field} to:`, value);
+    setFormData((prevData: VehicleFormData) => ({
+      ...prevData,
+      [field]: value
+    }));
   };
   
 
@@ -173,9 +273,9 @@ export default function VehicleInfoForm({ initialData, onNext, onBack }: Vehicle
         <form onSubmit={handleSubmit} className="space-y-4 max-w-4xl mx-auto">
           {/* Vehicle Details Section */}
           <div className="bg-white shadow-sm rounded-lg border border-gray-200 overflow-hidden">
-            <div className="px-4 py-3 border-b border-gray-200 bg-gray-50">
+            <div className="px-4 py-3 border-b border-gray-200 bg-primary-200">
               <h3 className="text-lg font-semibold text-gray-900">
-                {t('vehicle_info.vehicle_details')}
+                {t('vehicle_info.vehicle_selection')}
               </h3>
             </div>
           
@@ -194,17 +294,23 @@ export default function VehicleInfoForm({ initialData, onNext, onBack }: Vehicle
                     optionLabel="name"
                     optionValue="id"
                     onChange={(e) => {
-                      updateFormData('make', e.value);
-                      updateFormData('model', null);
-                      updateFormData('year', null);
-                      updateFormData('type', '');
+                      console.log('Make selected:', e.value, typeof e.value);
+                      // First reset dependent fields to avoid race conditions
+                      setFormData((prevData: VehicleFormData) => ({
+                        ...prevData,
+                        make: e.value,
+                        model: null,
+                        year: null,
+                        type: ''
+                      }));
                     }}
-                    placeholder={t('vehicle_info.select_make')}
+                    placeholder={t('vehicle_info.make')}
                     filter
                     className={classNames(
                       'w-full transition-colors duration-200',
                       { 'p-invalid': submitted && !formData.make }
                     )}
+                    emptyMessage={t('common.no_results')}
                   />
                   {submitted && !formData.make && (
                     <small className="text-red-500 text-sm mt-1">{t('validation.required')}</small>
@@ -223,20 +329,26 @@ export default function VehicleInfoForm({ initialData, onNext, onBack }: Vehicle
                     optionLabel="name"
                     optionValue="id"
                     onChange={(e) => {
-                      updateFormData('model', e.value);
-                      updateFormData('year', null);
-                      updateFormData('type', '');
+                      console.log('Model selected:', e.value, typeof e.value);
+                      // First reset dependent fields to avoid race conditions
+                      setFormData((prevData: VehicleFormData) => ({
+                        ...prevData,
+                        model: e.value,
+                        year: null,
+                        type: ''
+                      }));
                     }}
-                    placeholder={t('vehicle_info.model')}
+                    placeholder={formData.make ? t('vehicle_info.model') : t('validation.select_make_first')}
                     filter
                     disabled={!formData.make}
                     className={classNames(
                       'w-full transition-colors duration-200',
                       { 'p-invalid': submitted && !formData.model }
                     )}
+                    emptyMessage={models.length === 0 ? t('vehicle_info.no_models_available') : t('common.no_results')}
                   />
                   {submitted && !formData.model && (
-                    <small className="text-red-500 text-sm mt-1">{t('validation.car_type_invalid')}</small>
+                    <small className="text-red-500 text-sm mt-1">{t('validation.required')}</small>
                   )}
                 </div>
 
@@ -250,14 +362,19 @@ export default function VehicleInfoForm({ initialData, onNext, onBack }: Vehicle
                     value={formData.year}
                     options={years.map(year => ({ label: year.toString(), value: year }))}
                     onChange={(e) => {
-                      updateFormData('year', e.value);
+                      console.log('Year selected:', e.value, typeof e.value);
+                      setFormData((prevData: VehicleFormData) => ({
+                        ...prevData,
+                        year: e.value
+                      }));
                     }}
-                    placeholder={t('common.required')}
+                    placeholder={formData.model ? t('vehicle_info.select_year') : t('validation.select_model_first')}
                     disabled={!formData.model}
                     className={classNames(
                       'w-full transition-colors duration-200',
                       { 'p-invalid': submitted && !formData.year }
                     )}
+                    emptyMessage={years.length === 0 ? t('vehicle_info.no_years_available') : t('common.no_results')}
                   />
                   {submitted && !formData.year && (
                     <small className="text-red-500 text-sm mt-1">{t('validation.required')}</small>
@@ -272,59 +389,63 @@ export default function VehicleInfoForm({ initialData, onNext, onBack }: Vehicle
                   <Dropdown
                     id="type"
                     value={formData.type}
-                    options={types}
-                    onChange={(e) => updateFormData('type', e.value)}
-                    placeholder={formData.model ? t('common.required') : t('validation.select_model_first')}
+                    options={types.map(type => ({ label: type, value: type  }))}
+                    optionLabel="label"
+                    optionValue="value"
+                    onChange={(e) => {
+                      console.log('Type selected:', e.value, typeof e.value);
+                      setFormData((prevData: VehicleFormData) => ({
+                        ...prevData,
+                        type: e.value
+                      }));
+                    }}
+                    placeholder={formData.model ? t('vehicle_info.select_type') : t('validation.select_model_first')}
                     disabled={!formData.model}
                     className={classNames(
                       'w-full transition-colors duration-200',
                       { 'p-invalid': submitted && !formData.type }
                     )}
+                    emptyMessage={types.length === 0 ? t('vehicle_info.no_types_available') : t('common.no_results')}
                   />
                   {submitted && !formData.type && (
                     <small className="text-red-500 text-sm mt-1">{t('validation.required')}</small>
                   )}
                 </div>
               </div>
-
-              {/* Selected Vehicle Summary */}
-              {(formData.make || formData.model || formData.year || formData.type) && (
-                <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-100">
-                  <h4 className="text-sm font-medium text-blue-900 mb-3">{t('vehicle_info.selected_vehicle')}</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {formData.make && (
-                      <div className="flex items-center space-x-2">
-                        <span className="text-sm font-medium text-blue-800">{t('vehicle_info.make')}:</span>
-                        <span className="text-sm text-blue-900">{makes.find(m => m.id === formData.make)?.name || ''}</span>
-                      </div>
-                    )}
-                    {formData.model && (
-                      <div className="flex items-center space-x-2">
-                        <span className="text-sm font-medium text-blue-800">{t('vehicle_info.model')}:</span>
-                        <span className="text-sm text-blue-900">{models.find(m => m.id === formData.model)?.name || ''}</span>
-                      </div>
-                    )}
-                    {formData.year && (
-                      <div className="flex items-center space-x-2">
-                        <span className="text-sm font-medium text-blue-800">{t('vehicle_info.year')}:</span>
-                        <span className="text-sm text-blue-900">{formData.year}</span>
-                      </div>
-                    )}
-                    {formData.type && (
-                      <div className="flex items-center space-x-2">
-                        <span className="text-sm font-medium text-blue-800">{t('vehicle_info.type')}:</span>
-                        <span className="text-sm text-blue-900">{formData.type}</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
+            </div>
+          </div>
+          {/* Vehicle Summary */}
+          <div className="bg-white shadow-sm rounded-lg border border-gray-200 overflow-hidden mt-4">
+            <div className="px-4 py-3 border-b border-gray-200 bg-primary-200">
+              <h3 className="text-lg font-semibold text-gray-900">
+                {t('vehicle_info.selected_vehicle')}
+              </h3>
+            </div>
+            <div className="p-4">
+            {(formData.make && formData.model) && (
+            <VehicleCard
+              make={formData.make}
+              model={formData.model}
+              year={formData.year}
+              type={formData.type}
+              makes={makes}
+              models={models}
+              vehicleUses={vehicleUses}
+              primaryUse={formData.primaryUse}
+              annualMileage={formData.annualMileage}
+              parking={formData.parking}
+              antiTheft={formData.antiTheft}
+              winterTires={formData.winterTires}
+              t={t}
+            />
+          )}
             </div>
           </div>
 
           {/* Usage Section */}
+          {/* Usage Section */}
           <div className="bg-white shadow-sm rounded-lg border border-gray-200 overflow-hidden mt-4">
-            <div className="px-4 py-3 border-b border-gray-200 bg-gray-50">
+            <div className="px-4 py-3 border-b border-gray-200 bg-primary-200">
               <h3 className="text-lg font-semibold text-gray-900">
                 {t('vehicle_info.primary_use')}
               </h3>
@@ -340,15 +461,18 @@ export default function VehicleInfoForm({ initialData, onNext, onBack }: Vehicle
                   <Dropdown
                     id="primaryUse"
                     value={formData.primaryUse}
-                    options={[
-                      { label: 'Commute to Work', value: 'commute' },
-                      { label: 'Pleasure', value: 'pleasure' },
-                      { label: 'Business', value: 'business' }
-                    ]}
+                    options={vehicleUsesData.map(use => ({
+                      label: t(`vehicle_info.${use.id}`),
+                      value: use.id
+                    }))}
                     onChange={(e) => updateFormData('primaryUse', e.value)}
-                    placeholder={t('common.required')}
-                    className="w-full"
-                    filter
+                    placeholder={t('validation.select_primary_use_first')}
+                    disabled={!formData.model}
+                    className={classNames(
+                      'w-full transition-colors duration-200',
+                      { 'p-invalid': submitted && !formData.primaryUse }
+                    )}
+                    emptyMessage={vehicleUses.length === 0 ? t('common.no_results') : t('common.no_results')}
                   />
                   {submitted && !formData.primaryUse && (
                     <small className="text-red-500 text-sm mt-1">{t('validation.required')}</small>
@@ -385,116 +509,82 @@ export default function VehicleInfoForm({ initialData, onNext, onBack }: Vehicle
 
           {/* Parking and Features Section */}
           <div className="bg-white shadow-sm rounded-lg border border-gray-200 overflow-hidden mt-4">
-            <div className="px-4 py-3 border-b border-gray-200 bg-gray-50">
+            <div className="px-4 py-3 border-b border-gray-200 bg-primary-200">
               <h3 className="text-lg font-semibold text-gray-900">
                 {t('vehicle_info.parking')}
               </h3>
             </div>
 
             <div className="p-4">
-              {/* Parking Options */}
-              <div className="mb-4">
-                <h4 className="text-sm font-medium text-gray-900 mb-4">{t('vehicle_info.parking')} *</h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="flex items-center space-x-3">
+              <div className="flex flex-wrap gap-3">
+                {parkingOptions.map((option) => (
+                  <div key={option.id} className="flex items-center ">
                     <RadioButton
-                      inputId="parking-garage"
-                      name="parking"
-                      value="garage"
-                      onChange={(e) => updateFormData('parking', e.value)}
-                      checked={formData.parking === 'garage'}
-                    />
-                    <label htmlFor="parking-garage" className="text-sm text-gray-700">{t('vehicle_info.garage')}</label>
-                  </div>
-                  
-                  <div className="flex items-center space-x-3">
-                    <RadioButton
-                      inputId="parking-driveway"
-                      name="parking"
-                      value="driveway"
-                      onChange={(e) => updateFormData('parking', e.value)}
-                      checked={formData.parking === 'driveway'}
-                      className="cursor-pointer"
-                    />
-                    <label htmlFor="parking-driveway" className="text-sm text-gray-700 cursor-pointer select-none">{t('vehicle_info.driveway')}</label>
-                  </div>
-                  
-                  <div className="flex items-center space-x-3">
-                    <RadioButton
-                      inputId="parking-street"
-                      name="parking"
-                      value="street"
-                      onChange={(e) => updateFormData('parking', e.value)}
-                      checked={formData.parking === 'street'}
-                      className="cursor-pointer"
-                    />
-                    <label htmlFor="parking-street" className="text-sm text-gray-700 cursor-pointer select-none">{t('vehicle_info.street')}</label>
-                  </div>
-                  
-                  <div className="flex items-center space-x-3">
-                    <RadioButton
-                      inputId="parking-lot"
-                      name="parking"
-                      value="parking_lot"
-                      onChange={(e) => updateFormData('parking', e.value)}
-                      checked={formData.parking === 'parking_lot'}
-                      className="cursor-pointer"
-                    />
-                    <label htmlFor="parking-lot" className="text-sm text-gray-700 cursor-pointer select-none">{t('vehicle_info.parking_lot')}</label>
-                  </div>
+                      inputId={`parking-${option.id}`}
+                        name="parking"
+                        value={option.value}
+                        onChange={(e) => updateFormData('parking', e.value)}
+                        checked={formData.parking === option.value}
+                      />
+                      <label 
+                        htmlFor={`parking-${option.id}`} 
+                        className="ml-1"  >
+                        {option.label}
+                      </label>
+                    </div>
+                  ))}
                 </div>
                 {submitted && !formData.parking && (
                   <small className="text-red-500 text-sm mt-2">{t('validation.required')}</small>
                 )}
               </div>
-              
-              {/* Vehicle Features */}
-              <div>
-                <h4 className="text-sm font-medium text-gray-900 mb-4">{t('vehicle_info.vehicle_features')}</h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="flex items-center space-x-3">
-                    <Checkbox
-                      inputId="antiTheft"
-                      name="antiTheft"
-                      checked={formData.antiTheft}
-                      onChange={(e) => updateFormData('antiTheft', e.checked)}
-                      className="cursor-pointer"
-                    />
-                    <label htmlFor="antiTheft" className="text-sm text-gray-700 cursor-pointer select-none">{t('vehicle_info.anti_theft')}</label>
-                  </div>
-                  
-                  <div className="flex items-center space-x-3">
-                    <Checkbox
-                      inputId="winterTires"
-                      name="winterTires"
-                      checked={formData.winterTires}
-                      onChange={(e) => updateFormData('winterTires', e.checked)}
-                      className="cursor-pointer"
-                    />
-                    <label htmlFor="winterTires" className="text-sm text-gray-700 cursor-pointer select-none">{t('vehicle_info.winter_tires')}</label>
-                  </div>
-                </div>
-              </div>
             </div>
-          </div>
-          
+          <div className="bg-white shadow-sm rounded-lg border border-gray-200 overflow-hidden mt-4">
+            <div className="px-4 py-3 border-b border-gray-200 bg-primary-200">
+              <h3 className="text-lg font-semibold text-gray-900">
+                {t('vehicle_info.vehicle_features')}
+              </h3>
+            </div>
+            <div className="p-4">
+                <div className="flex flex-wrap gap-3">
+                {featureOptions.map((feature) => (
+                    <div key={feature.id} className="flex items-center space-x-3">
+                      <Checkbox
+                        inputId={feature.id}
+                        name={feature.name}
+                        checked={formData[feature.name as keyof typeof formData] as boolean}
+                        onChange={(e) => updateFormData(feature.name, e.checked)}
+                        className="cursor-pointer"
+                      />
+                      <label 
+                        htmlFor={feature.id} 
+                        className="ml-2"                      >
+                        {feature.label}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              </div> 
+            </div>
           {/* Form Actions */}
-          <div className="flex justify-between items-center mt-8 pt-6 border-t border-gray-200">
-            <Button
-              type="button"
-              label={t('common.previous')}
-              icon="pi pi-arrow-left"
-              className="p-button-secondary"
-              onClick={onBack}
-            />
+          <div className="flex justify-content-between mt-4 w-full">
+            <div>
+              <Button
+                type="button"
+                label={t('common.previous')}
+                icon="pi pi-arrow-left"
+                onClick={onBack}
+              />
+            </div>
             
-            <Button
-              type="submit"
-              label={t('common.next')}
-              icon="pi pi-arrow-right"
-              iconPos="right"
-              className="p-button-primary"
-            />
+            <div>
+              <Button
+                type="submit"
+                label={t('common.next')}
+                icon="pi pi-arrow-right"
+                iconPos="right"
+              />
+            </div>
           </div>
         </form>
       </div>

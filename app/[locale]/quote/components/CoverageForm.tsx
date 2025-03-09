@@ -82,10 +82,17 @@ export default function CoverageForm({
             
             coverageData.mandatory.forEach((coverage: any) => {
               // 为特定的强制性保险设置特殊处理
-              if (['accident_benefits', 'uninsured_automobile', 'direct_compensation'].includes(coverage.id)) {
-                // 为这些特殊情况设置最小默认值50000
+              if (['accident_benefits', 'uninsured_automobile'].includes(coverage.id)) {
+                // API响应中这些保险只有level属性
                 mandatoryDefaults[coverage.id] = {
-                  amount: coverage.defaultAmount || 50000,
+                  level: coverage.defaultAmount || 'standard',
+                  selected: true
+                };
+                console.log(`Setting default for ${coverage.id}:`, mandatoryDefaults[coverage.id]);
+              } else if (coverage.id === 'direct_compensation_property_damage') {
+                // 直接赔偿财产损失使用level而不是amount
+                mandatoryDefaults[coverage.id] = {
+                  level: coverage.defaultAmount || 'standard',
                   selected: true
                 };
                 console.log(`Setting default for ${coverage.id}:`, mandatoryDefaults[coverage.id]);
@@ -227,16 +234,24 @@ export default function CoverageForm({
       };
       
       // 检查并修复特定强制性保险的0值
-      const mandatoryCoverageIdsToCheck = ['accident_benefits', 'uninsured_automobile', 'direct_compensation'];
-      mandatoryCoverageIdsToCheck.forEach(coverageId => {
+      const amountCoverageIdsToCheck = ['accident_benefits', 'uninsured_automobile'];
+      amountCoverageIdsToCheck.forEach(coverageId => {
         if (normalizedFormData.mandatoryCoverages[coverageId] && 
             (normalizedFormData.mandatoryCoverages[coverageId].amount === 0 || 
              !normalizedFormData.mandatoryCoverages[coverageId].amount)) {
           // 如果金额为0或未定义，则设置默认值
-          normalizedFormData.mandatoryCoverages[coverageId].amount = 50000;
-          console.log(`Fixed ${coverageId} amount to 50000`);
+          const defaultAmount = coverageId === 'uninsured_automobile' ? 200000 : 50000;
+          normalizedFormData.mandatoryCoverages[coverageId].amount = defaultAmount;
+          console.log(`Fixed ${coverageId} amount to ${defaultAmount}`);
         }
       });
+      
+      // 检查直接赔偿财产损失的level
+      if (normalizedFormData.mandatoryCoverages['direct_compensation_property_damage'] && 
+          !normalizedFormData.mandatoryCoverages['direct_compensation_property_damage'].level) {
+        normalizedFormData.mandatoryCoverages['direct_compensation_property_damage'].level = 'standard';
+        console.log(`Fixed direct_compensation_property_damage level to standard`);
+      }
       
       console.log('Normalized form data for quote calculation:', normalizedFormData);
       
@@ -365,9 +380,9 @@ export default function CoverageForm({
       <h2 className="text-xl font-bold mb-1">{t('coverage.title')}</h2>
       <p className="text-sm mb-4" style={{ color: 'var(--secondary-color)' }}>{t('coverage.subtitle')}</p>
       
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
+      <div className="grid">
         {/* 左侧栏 - 保险选择 */}
-        <div className="lg:col-span-2">
+        <div className="col-12 md:col-8">
           <form onSubmit={handleSubmit} className="p-fluid">
             {/* 强制性保险部分 */}
             <div className="info-card mb-3">
@@ -386,14 +401,43 @@ export default function CoverageForm({
                         {coverage.defaultAmount && (
                           <div>
                             <label className="block text-xs mb-1" style={{ color: 'var(--secondary-color)' }}>
-                              {coverage.name_en.includes('Accident') ? t('coverage.liability') : t('coverage.deductible')}
+                              {coverage.id === 'direct_compensation_property_damage' 
+                                ? t('coverage.coverage_level')
+                                : coverage.name_en.includes('Accident') 
+                                  ? t('coverage.liability') 
+                                  : t('coverage.deductible')}
                             </label>
                             <Dropdown
-                              value={formData.mandatoryCoverages[coverage.id]?.amount || coverage.defaultAmount || 50000}
+                              value={
+                                ['direct_compensation_property_damage', 'accident_benefits', 'uninsured_automobile'].includes(coverage.id)
+                                  ? formData.mandatoryCoverages[coverage.id]?.level || coverage.defaultAmount || 'standard'
+                                  : formData.mandatoryCoverages[coverage.id]?.amount || coverage.defaultAmount || 50000
+                              }
                               options={coverage.options.map((option: any) => {
-                                // 确保重要的强制性保险没有$0选项
-                                const optionAmount = option.amount || 
-                                  (['accident_benefits', 'uninsured_automobile', 'direct_compensation'].includes(coverage.id) ? 50000 : 0);
+                                // 处理直接赔偿财产损失、意外伤害保险和无保险驾驶人 - 使用level
+                                if (['direct_compensation_property_damage', 'accident_benefits', 'uninsured_automobile'].includes(coverage.id)) {
+                                  let levelText = '';
+                                  if (option.level === 'standard') {
+                                    levelText = t('coverage.standard');
+                                  } else if (option.level === 'enhanced') {
+                                    levelText = t('coverage.enhanced');
+                                  } else if (option.level === 'premium') {
+                                    levelText = t('coverage.premium');
+                                  } else {
+                                    levelText = option.level;
+                                  }
+                                  
+                                  return {
+                                    label: levelText,
+                                    value: option.level
+                                  };
+                                }
+                                
+                                // 处理其他保险
+                                let optionAmount = option.amount;
+                                if (!optionAmount) {
+                                  optionAmount = 0;
+                                }
                                 
                                 return {
                                   label: `$${optionAmount.toLocaleString()}`,
@@ -401,7 +445,12 @@ export default function CoverageForm({
                                 };
                               })}
                               onChange={(e) => {
-                                updateCoverage('mandatoryCoverages', coverage.id, 'amount', e.value);
+                                // 对于直接赔偿财产损失、意外伤害保险和无保险驾驶人，更新level而不是amount
+                                if (['direct_compensation_property_damage', 'accident_benefits', 'uninsured_automobile'].includes(coverage.id)) {
+                                  updateCoverage('mandatoryCoverages', coverage.id, 'level', e.value);
+                                } else {
+                                  updateCoverage('mandatoryCoverages', coverage.id, 'amount', e.value);
+                                }
                                 // 保险变更时强制重新计算
                                 setTimeout(() => calculateQuote(), 100);
                               }}
@@ -529,30 +578,34 @@ export default function CoverageForm({
               ))}
             </div>            
             {/* 表单操作按钮 */}
-            <div className="flex justify-between mt-3">
-              <Button
-                type="button"
-                label={t('common.previous')}
-                icon="pi pi-arrow-left"
-                className="p-button-secondary p-button-sm"
-                onClick={onBack}
-              />
+            <div className="flex justify-content-between w-full">
+              <div>
+                <Button
+                  type="button"
+                  label={t('common.previous')}
+                  icon="pi pi-arrow-left"
+                  className="p-button-secondary p-button-sm"
+                  onClick={onBack}
+                />
+              </div>
               
-              <Button
-                type="submit"
-                label={t('common.submit')}
-                icon="pi pi-check"
-                iconPos="right"
-                className="p-button-sm"
-                disabled={calculating || submitting}
-                loading={submitting}
-              />
+              <div>
+                <Button
+                  type="submit"
+                  label={t('common.submit')}
+                  icon="pi pi-check"
+                  iconPos="right"
+                  className="p-button-sm"
+                  disabled={calculating || submitting}
+                  loading={submitting}
+                />
+              </div>
             </div>
           </form>
         </div>
         
         {/* 右侧栏 - 报价摘要 */}
-        <div>
+        <div className="col-12 md:col-4">
           <div className="price-breakdown-card">
             <h3 className="text-lg font-semibold p-3 border-bottom" style={{ color: 'var(--primary-color)', borderColor: 'var(--border-color)' }}>
               {t('quote_result.price_breakdown')}
@@ -625,14 +678,14 @@ export default function CoverageForm({
       
       {/* 报价参考号对话框 */}
       <Dialog 
-        header={t('quote.success_title')} 
+        header={t('quote_result.title')} 
         visible={showQuoteDialog} 
         style={{ width: '90%', maxWidth: '900px' }} 
         onHide={() => setShowQuoteDialog(false)}
         footer={
           <div className="flex justify-between">
             <Button 
-              label={t('quote.view_quote')} 
+              label={t('quote_result.view_quote')} 
               icon="pi pi-eye" 
               className="p-button-sm" 
               onClick={() => router.push(`/quote/view/${quoteReference}`)}
@@ -649,12 +702,12 @@ export default function CoverageForm({
       >
         <div className="p-4 text-center">
           <i className="pi pi-check-circle text-5xl mb-3" style={{ color: 'var(--success-color)' }}></i>
-          <p className="mb-4">{t('quote.success_message')}</p>
+          <p className="mb-4">{t('quote_result.success_message')}</p>
           <div className="p-3 rounded-lg mb-3 quote-reference-container">
-            <h4 className="text-lg font-bold mb-1">{t('quote.reference_code')}</h4>
+            <h4 className="text-lg font-bold mb-1">{t('quote_result.quote_reference')}</h4>
             <p className="text-xl font-mono quote-reference-number">{quoteReference}</p>
           </div>
-          <p className="text-sm" style={{ color: 'var(--secondary-color)' }}>{t('quote.save_reference')}</p>
+          <p className="text-sm" style={{ color: 'var(--secondary-color)' }}>{t('quote_result.save_reference')}</p>
         </div>
       </Dialog>
     </div>

@@ -16,6 +16,7 @@
     "success": "Success",
     "warning": "Warning",
     "info": "Information",
+    "sendEmail": "Send Email",
     "emailSent": "Email has been sent successfully",
     "emailFailed": "Failed to send email",
     "language": "Language",
@@ -25,7 +26,8 @@
     "close": "Close",
     "yes": "Yes",
     "no": "No",
-    "not_provided": "Not provided"
+    "not_provided": "Not provided",
+    "no_results": "No results"
   },
   "landing": {
     "title": "Get Your Car Insurance Quote in 3 Easy Steps",
@@ -96,7 +98,16 @@
     "anti_theft": "Anti-theft Device",
     "winter_tires": "Winter Tires",
     "additional_vehicle": "Do you want to add another vehicle?",
-    "add_vehicle": "Add Vehicle"
+    "add_vehicle": "Add Vehicle",
+    "no_models_available": "No models available",
+    "no_years_available": "No years available",
+    "no_types_available": "No types available",
+    "commute": "Commute to Work",
+    "pleasure": "Pleasure",
+    "business": "Business",
+    "select_type":"Please select a type first",
+    "select_model":"Please select a model first",
+    "select_year":"Please select a year first"
   },
   "coverage": {
     "title": "Coverage Selection",
@@ -111,13 +122,21 @@
     "discounts": "Available Discounts",
     "apply_discount": "Apply Discount",
     "calculating_quote": "Calculating your quote...",
-    "select_coverage_to_calculate": "Select coverage options to calculate your quote"
+    "select_coverage_to_calculate": "Select coverage options to calculate your quote",
+    "standard": "Standard",
+    "enhanced": "Enhanced",
+    "premium": "Premium",
+    "coverage_level": "Coverage Level"
   },
   "quote_result": {
     "title": "Your Insurance Quote",
     "subtitle": "Based on the information you provided",
     "quote_reference": "Quote Reference",
     "price_breakdown": "Price Breakdown",
+    "success_title": "Success",
+    "success_message": "Your quote has been successfully generated",
+    "save_reference": "Your quote reference has been saved",
+    "view_quote": "View Quote",
     "base_premium": "Base Premium",
     "discounts": "Discounts",
     "fees": "Fees",
@@ -141,6 +160,9 @@
     "max_exceeded": "Value exceeds maximum limit",
     "select_make_first": "Please select a make first",
     "select_model_first": "Please select a model first",
+    "select_year_first": "Please select a year first",
+    "select_type_first": "Please select a type first",
+    "select_primary_use_first": "Please select a primary use first",
     "complete_vehicle_selection": "Please select make, model, and year",
     "car_type_invalid":"Please enter a valid car type"
   }

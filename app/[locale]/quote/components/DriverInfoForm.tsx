@@ -412,14 +412,19 @@ export default function DriverInfoForm({ initialData, onNext }: DriverInfoFormPr
         </div>
         
         {/* Form Actions */}
-        <div className="flex justify-end mt-2">
-          <Button
-            type="submit"
-            label={t('common.next')}
-            icon="pi pi-check" 
-            iconPos="right"
-            className="form-submit-button"
-          />
+        <div className="flex justify-between mt-2 w-full">
+          <div>
+            {/* This div is empty for the first form, but maintains consistent layout */}
+          </div>
+          <div>
+            <Button
+              type="submit"
+              label={t('common.next')}
+              icon="pi pi-arrow-right" 
+              iconPos="right"
+              className="form-submit-button"
+            />
+          </div>
         </div>
       </form>
     </div>

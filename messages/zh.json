@@ -16,12 +16,15 @@
     "success": "成功",
     "warning": "警告",
     "info": "信息",
+    "sendEmail": "发送邮件",
     "emailSent": "邮件已成功发送",
     "emailFailed": "邮件发送失败",
     "language": "语言",
     "theme": "主题",
     "professionalTheme": "专业",
-    "vibrantTheme": "活泼"
+    "vibrantTheme": "活泼",
+    "not_provided": "未提供",
+    "no_results": "没有结果"
   },
   "landing": {
     "title": "三个简单步骤获取您的汽车保险报价",
@@ -92,7 +95,16 @@
     "anti_theft": "防盗装置",
     "winter_tires": "冬季轮胎",
     "additional_vehicle": "您想添加另一辆车吗？",
-    "add_vehicle": "添加车辆"
+    "add_vehicle": "添加车辆",
+    "no_models_available": "没有可用的型号",
+    "no_years_available": "没有可用的年份",
+    "no_types_available": "没有可用的类型",
+    "commute": "上下班通勤",
+    "pleasure": "休闲",
+    "business": "商务",
+    "select_type":"请先选择类型",
+    "select_model":"请先选择型号",
+    "select_year":"请先选择年份"
   },
   "coverage": {
     "title": "保险选择",
@@ -101,6 +113,10 @@
     "optional": "可选保险",
     "liability": "责任限额",
     "deductible": "免赔额",
+    "coverage_level": "保障等级",
+    "standard": "标准",
+    "enhanced": "增强",
+    "premium": "高级",
     "comprehensive": "综合保险",
     "collision": "碰撞险",
     "endorsements": "附加保障和选项",
@@ -108,6 +124,7 @@
     "apply_discount": "应用折扣",
     "calculating_quote": "正在计算报价...",
     "select_coverage_to_calculate": "请选择保险选项以计算报价"
+
   },
   "quote_result": {
     "title": "您的保险报价",
@@ -125,7 +142,12 @@
     "email_quote": "邮件发送报价",
     "email_sent": "报价已通过邮件发送至",
     "start_over": "重新开始",
-    "modify_quote": "修改报价"
+    "modify_quote": "修改报价",
+    "success_title": "成功",
+    "success_message": "您的报价已成功生成",
+    "save_reference": "您的报价参考号已保存",
+    "view_quote": "查看报价",
+    "coverage_level": "保障等级"
   },
   "validation": {
     "required": "此字段为必填项",
@@ -137,6 +159,9 @@
     "max_exceeded": "值超过最大限制",
     "select_make_first": "请先选择品牌",
     "select_model_first": "请先选择型号",
+    "select_year_first": "请先选择年份",
+    "select_type_first": "请先选择类型",
+    "select_primary_use_first": "请先选择主要用途",
     "complete_vehicle_selection": "请选择品牌、型号和年份",
     "car_type_invalid":"请输入有效的车辆类型"
   }

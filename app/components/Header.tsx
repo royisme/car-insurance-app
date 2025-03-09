@@ -77,7 +77,6 @@ export default function Header() {
           <div className="grid">
             {/* Logo and Title */}
             <div className="col-12 md:col-6 flex align-items-center">
-              <Link href="/" className="flex align-items-center">
                 <div className="flex align-items-center gap-2">
                   <div className="bg-white w-3rem h-3rem flex align-items-center justify-content-center font-bold border-round-sm" 
                        style={{
@@ -98,8 +97,7 @@ export default function Header() {
                     <div className="text-sm text-white">{t('common.appName')}</div>
                   </div>
                 </div>
-              </Link>
-            </div>
+             </div>
             
             {/* Settings */}
             <div className="col-12 md:col-6 mt-3 md:mt-0">
@@ -147,7 +145,6 @@ export default function Header() {
             <div className="flex align-items-center text-sm text-center">
               <span className="mr-1">⏱️</span>
               <span>Already a ROY customer? Fast track your quote using your </span>
-              <a href="#" className={`font-medium ml-1 ${theme === 'vibrant' ? 'text-blue-600' : 'text-indigo-700'}`}>MyInsurance log in credentials</a>
             </div>
           </div>
         </div>

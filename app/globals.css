@@ -1,4 +1,3 @@
-/* 保险应用扩展样式 - 与现有主题系统兼容 */
 
 @import 'primereact/resources/themes/lara-light-indigo/theme.css';
 @import 'primereact/resources/primereact.min.css';
@@ -6,9 +5,7 @@
 @import 'primeflex/primeflex.min.css'; 
 
 
-/* 增强现有的主题变量 */
 :root {
-  /* 保留您现有的变量 
   --primary-color: #1a365d;
   --secondary-color: #4a5568;
   --accent-color: #3182ce;
@@ -19,7 +16,7 @@
   --warning-color: #dd6b20;
   --error-color: #e53e3e;
   --info-color: #3182ce;
-  */
+  
   
   /* 添加新的扩展变量，使用现有主题变量作为基础 */
   --primary-light: rgba(26, 54, 93, 0.1);
@@ -54,7 +51,6 @@
 
 /* 扩展Vibrant主题的变量 */
 [data-theme='vibrant'] {
-  /* 保留您现有的变量
   --primary-color: #38b2ac;
   --secondary-color: #4fd1c5;
   --accent-color: #f6ad55;
@@ -65,7 +61,7 @@
   --warning-color: #fbd38d;
   --error-color: #fc8181;
   --info-color: #63b3ed;
-  */
+ 
   
   /* 扩展变量 */
   --primary-light: rgba(56, 178, 172, 0.1);
